@@ -1,0 +1,19 @@
+{
+  "name": "highway",
+  "version": "1.0.0",
+  "description": "Highway is an light-weight JS Router",
+  "main": "highway.js",
+  "scripts": {},
+  "author": "Anthodpnt <antho.dpnt@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-core": "^6.24.1",
+    "babel-loader": "^6.4.1",
+    "babel-preset-env": "^1.4.0",
+    "babel-preset-es2015-native-modules": "^6.9.4",
+    "compression-webpack-plugin": "^0.4.0",
+    "uglifyjs-webpack-plugin": "^0.4.3",
+    "webpack": "^2.4.1"
+  }
+}
