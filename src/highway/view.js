@@ -1,7 +1,7 @@
 /**
  * Highway - View File:
  * This file contains the methods handling the display of your pages. It works
- * in pair with the `index.js` file so never forget to add both of them in your
+ * in pair with the `core.js` file so never forget to add both of them in your
  * project directory since they depend on each other.
  * 
  * @author: Anthodpnt <antho.dpnt@gmail.com>
@@ -140,4 +140,4 @@ class View {
 
 
 // Export Class
-export default HighwayView;
+export default View;

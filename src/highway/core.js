@@ -242,4 +242,4 @@ class Core {
 }
 
 // Export Class
-export default Highway;
+export default Core;
