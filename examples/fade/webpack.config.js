@@ -1,6 +1,3 @@
-const CompressionPlugin = require('compression-webpack-plugin');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
-
 const webpack = require('webpack');
 const path = require('path');
 const del  = require('del');
@@ -11,11 +8,11 @@ del(path.resolve(__dirname, 'build'), { force: true });
 // Configuration
 module.exports = {
   entry: {
-    highway: path.resolve(__dirname, 'src/highway.js'),
+    main: path.resolve(__dirname, 'src/main.js'),
   },
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: '[name].min.js',
+    filename: '[name].js',
   },
   module: {
     rules: [
@@ -37,8 +34,4 @@ module.exports = {
     ],
     extensions: ['.js'],
   },
-  plugins: [
-    new CompressionPlugin(),
-    new UglifyJSPlugin(),
-  ],
 };

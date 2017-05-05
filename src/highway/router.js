@@ -1,5 +1,5 @@
 /**
- * Highway - Core File:
+ * Highway - Router File:
  * This file contains the methods handling the routing our your pages. It works
  * in pair with the `view.js` file so never forget to add both of them in your
  * project directory since they depend on each other.
@@ -9,7 +9,7 @@
  */
 
 
-class Core {
+class Router {
   /**
    * Constructor:
    * Construct the class and initialise it.
@@ -68,7 +68,7 @@ class Core {
     // Update
     if (!this.onUpdate) {
       // Get Links
-      const links = this.current.root.querySelectorAll('a[href]:not([disabled])');
+      const links = document.querySelectorAll('[a[href]:not([disabled])]');
 
       // Create Events
       this.onUpdate = this.update.bind(this);
@@ -89,7 +89,7 @@ class Core {
     // Update
     if (this.onUpdate) {
       // Get Links
-      const links = this.previous.root.querySelectorAll('a[href]:not([disabled])');
+      const links = document.querySelectorAll('a[href]:not([disabled])');
       
       // Remove Events from DOM Links
       [].forEach.call(links, (el, i) => {
@@ -242,4 +242,4 @@ class Core {
 }
 
 // Export Class
-export default Core;
+export default Router;

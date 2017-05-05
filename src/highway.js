@@ -7,11 +7,11 @@
  */
 
 
-import Core from './highway/core';
+import Router from './highway/router';
 import View from './highway/view';
 
-const Highway = {
-  Core: Core,
+const Highway = { 
+  Router: Router, 
   View: View,
 };
 
