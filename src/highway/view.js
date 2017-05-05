@@ -76,9 +76,6 @@ class View {
     // Enter
     this.onEnter();
 
-    // Append
-    this.append();
-
     // Transition In
     this.tIn = new Promise((resolve, reject) => {
       if (!this.transition.in) {
@@ -117,7 +114,6 @@ class View {
     });
 
     this.tOut
-      .then(this.remove.bind(this))
       .then(callback)
       .catch(() => {
         throw new Error('Undefined Transition Out');

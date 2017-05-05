@@ -68,7 +68,7 @@ class Router {
     // Update
     if (!this.onUpdate) {
       // Get Links
-      const links = document.querySelectorAll('[a[href]:not([disabled])]');
+      const links = document.querySelectorAll('a:not([router-off])');
 
       // Create Events
       this.onUpdate = this.update.bind(this);
@@ -89,8 +89,8 @@ class Router {
     // Update
     if (this.onUpdate) {
       // Get Links
-      const links = document.querySelectorAll('a[href]:not([disabled])');
-      
+      const links = document.querySelectorAll('a:not([router-off])');
+
       // Remove Events from DOM Links
       [].forEach.call(links, (el, i) => {
         el.removeEventListener('click', this.onUpdate);
@@ -212,31 +212,55 @@ class Router {
     // Load/Unload Views
     switch (this.mode) {
       case 'both':
-        // Unload Previous
-        this.previous.unload();
+        // Unbind Events
         this.unbind();
 
         // Load Current
+        this.current.append();
         this.current.load();
-        this.bind();
+
+        // Unload Previous
+        this.previous.unload(() => {
+          // Destroy
+          this.previous.remove();
+
+          // Bind Events
+          this.bind();
+        });
         break;
       case 'in-out':
+        // Unbind Events
+        this.unbind();
+        
         // Load Current
+        this.current.append();
         this.current.load(() => {
           // Unload Previous
-          this.previous.unload();
-          this.unbind();
+          this.previous.unload(() => {
+            // Destroy
+            this.previous.remove();
+
+            // Bind Events
+            this.bind();
+          });
         });
-        this.bind();
         break;
       default:
+        // Unbind Events
+        this.unbind();
+
         // Unload Previous
         this.previous.unload(() => {
           // Load Current
+          this.current.append();
           this.current.load();
+
+          // Destroy
+          this.previous.remove();
+
+          // Bind Events
           this.bind();
         });
-        this.unbind();
     }
   }
 }

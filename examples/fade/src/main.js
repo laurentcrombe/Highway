@@ -1,5 +1,6 @@
 // Highway
 import Highway from 'highway';
+import TweenMax from 'gsap';
 
 // Views
 import Home from './views/home';
