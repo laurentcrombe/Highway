@@ -77,13 +77,13 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _router = __webpack_require__(7);
-
-var _router2 = _interopRequireDefault(_router);
-
 var _view = __webpack_require__(8);
 
 var _view2 = _interopRequireDefault(_view);
+
+var _router = __webpack_require__(7);
+
+var _router2 = _interopRequireDefault(_router);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -96,8 +96,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
  */
 
 var Highway = {
-  Router: _router2.default,
-  View: _view2.default
+  View: _view2.default,
+  Router: _router2.default
 };
 
 exports.default = Highway;
@@ -8708,8 +8708,6 @@ var Router = function () {
   }, {
     key: 'bind',
     value: function bind() {
-      var _this = this;
-
       // Popstate
       if (!this.onPopstate) {
         // Create Event
@@ -8722,15 +8720,36 @@ var Router = function () {
       // Update
       if (!this.onUpdate) {
         // Get Links
-        var links = document.querySelectorAll('a:not([router-off])');
+        var links = document.querySelectorAll('a:not([router-disable])');
 
         // Create Events
         this.onUpdate = this.update.bind(this);
 
         // Add Events on DOM Links
-        [].forEach.call(links, function (el, i) {
-          el.addEventListener('click', _this.onUpdate);
-        });
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
+
+        try {
+          for (var _iterator = links[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var link = _step.value;
+
+            link.addEventListener('click', this.onUpdate);
+          }
+        } catch (err) {
+          _didIteratorError = true;
+          _iteratorError = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion && _iterator.return) {
+              _iterator.return();
+            }
+          } finally {
+            if (_didIteratorError) {
+              throw _iteratorError;
+            }
+          }
+        }
       }
     }
 
@@ -8742,19 +8761,39 @@ var Router = function () {
   }, {
     key: 'unbind',
     value: function unbind() {
-      var _this2 = this;
-
       // Update
       if (this.onUpdate) {
         // Get Links
-        var links = document.querySelectorAll('a:not([router-off])');
+        var links = document.querySelectorAll('a:not([router-disable])');
 
         // Remove Events from DOM Links
-        [].forEach.call(links, function (el, i) {
-          el.removeEventListener('click', _this2.onUpdate);
-        });
+        var _iteratorNormalCompletion2 = true;
+        var _didIteratorError2 = false;
+        var _iteratorError2 = undefined;
 
-        // Clean up Events
+        try {
+          for (var _iterator2 = links[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+            var link = _step2.value;
+
+            link.removeEventListener('click', this.onUpdate);
+          }
+
+          // Clean up Events
+        } catch (err) {
+          _didIteratorError2 = true;
+          _iteratorError2 = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion2 && _iterator2.return) {
+              _iterator2.return();
+            }
+          } finally {
+            if (_didIteratorError2) {
+              throw _iteratorError2;
+            }
+          }
+        }
+
         this.onUpdate = null;
       }
     }
@@ -8787,8 +8826,17 @@ var Router = function () {
       event.preventDefault();
 
       // Get Path
-      var target = event.currentTarget;
-      var path = target.getAttribute('href');
+      var link = event.currentTarget;
+      var path = link.getAttribute('href');
+      var target = link.getAttribute('target');
+
+      // We check if the current link target should open in a new blank window.
+      // If the target is set to `_blank` the script stops otherwise it continues.
+      if (target === '_blank') {
+        // Open New Window
+        window.open(path, '_blank');
+        return;
+      }
 
       // We check if the current link redirects to a different page than the
       // displayed ones. If the two pages are different the script continues
@@ -8796,6 +8844,26 @@ var Router = function () {
       if (path !== this.path) {
         // Update Path
         this.path = path;
+
+        // Update Link
+        var current = link;
+        var previous = this.link;
+
+        if (previous) {
+          var classname = previous.getAttribute('router-active');
+          if (classname) {
+            previous.classList.remove(classname);
+          }
+          this.link = null;
+        }
+
+        if (current) {
+          var _classname = current.getAttribute('router-active');
+          if (_classname) {
+            current.classList.add(_classname);
+          }
+          this.link = current;
+        }
 
         // Push State in History
         window.history.pushState({ path: this.path }, '', this.path);
@@ -8813,16 +8881,16 @@ var Router = function () {
   }, {
     key: 'fetchCall',
     value: function fetchCall() {
-      var _this3 = this;
+      var _this = this;
 
       // We check if the path has been cached and we fetch it if not.
       if (!this.stack[this.path]) {
         fetch(this.path).then(function (response) {
           return response.text();
         }).then(function (result) {
-          return _this3.fetchSuccess(result);
+          return _this.fetchSuccess(result);
         }).catch(function (error) {
-          return _this3.fetchError(error);
+          return _this.fetchError(error);
         });
         return;
       }
@@ -8841,7 +8909,8 @@ var Router = function () {
     key: 'fetchSuccess',
     value: function fetchSuccess(result) {
       // Update Attributes
-      var page = document.createRange().createContextualFragment(result);
+      // const page  = document.createRange().createContextualFragment(result);
+      var page = new DOMParser().parseFromString(result, 'text/html');
       var title = page.querySelector('title').innerHTML;
       var root = page.querySelector('[namespace]');
       var name = root.getAttribute('namespace');
@@ -8878,7 +8947,7 @@ var Router = function () {
   }, {
     key: 'redirect',
     value: function redirect() {
-      var _this4 = this;
+      var _this2 = this;
 
       var name = this.stack[this.path].name;
 
@@ -8900,10 +8969,10 @@ var Router = function () {
           // Unload Previous
           this.previous.unload(function () {
             // Destroy
-            _this4.previous.remove();
+            _this2.previous.remove();
 
             // Bind Events
-            _this4.bind();
+            _this2.bind();
           });
           break;
         case 'in-out':
@@ -8914,12 +8983,12 @@ var Router = function () {
           this.current.append();
           this.current.load(function () {
             // Unload Previous
-            _this4.previous.unload(function () {
+            _this2.previous.unload(function () {
               // Destroy
-              _this4.previous.remove();
+              _this2.previous.remove();
 
               // Bind Events
-              _this4.bind();
+              _this2.bind();
             });
           });
           break;
@@ -8930,14 +8999,14 @@ var Router = function () {
           // Unload Previous
           this.previous.unload(function () {
             // Load Current
-            _this4.current.append();
-            _this4.current.load();
+            _this2.current.append();
+            _this2.current.load();
 
             // Destroy
-            _this4.previous.remove();
+            _this2.previous.remove();
 
             // Bind Events
-            _this4.bind();
+            _this2.bind();
           });
       }
     }

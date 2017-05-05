@@ -68,15 +68,15 @@ class Router {
     // Update
     if (!this.onUpdate) {
       // Get Links
-      const links = document.querySelectorAll('a:not([router-off])');
+      const links = document.querySelectorAll('a:not([router-disable])');
 
       // Create Events
       this.onUpdate = this.update.bind(this);
 
       // Add Events on DOM Links
-      [].forEach.call(links, (el, i) => {
-        el.addEventListener('click', this.onUpdate);
-      });
+      for (let link of links) {
+        link.addEventListener('click', this.onUpdate);
+      }
     }
   }
 
@@ -89,12 +89,12 @@ class Router {
     // Update
     if (this.onUpdate) {
       // Get Links
-      const links = document.querySelectorAll('a:not([router-off])');
+      const links = document.querySelectorAll('a:not([router-disable])');
 
       // Remove Events from DOM Links
-      [].forEach.call(links, (el, i) => {
-        el.removeEventListener('click', this.onUpdate);
-      });
+      for (let link of links) {
+        link.removeEventListener('click', this.onUpdate);
+      }
 
       // Clean up Events
       this.onUpdate = null;
@@ -125,8 +125,17 @@ class Router {
     event.preventDefault();
 
     // Get Path
-    const target = event.currentTarget;
-    const path   = target.getAttribute('href');
+    const link   = event.currentTarget;
+    const path   = link.getAttribute('href');
+    const target = link.getAttribute('target');
+
+    // We check if the current link target should open in a new blank window.
+    // If the target is set to `_blank` the script stops otherwise it continues.
+    if (target === '_blank') {
+      // Open New Window
+      window.open(path, '_blank');
+      return;
+    }
 
     // We check if the current link redirects to a different page than the
     // displayed ones. If the two pages are different the script continues
@@ -134,6 +143,26 @@ class Router {
     if (path !== this.path) {
       // Update Path
       this.path = path;
+
+      // Update Link
+      const current  = link;
+      const previous = this.link;
+
+      if (previous) {
+        const classname = previous.getAttribute('router-active');
+        if (classname) {
+          previous.classList.remove(classname);
+        }
+        this.link = null;
+      }
+
+      if (current) {
+        const classname = current.getAttribute('router-active');
+        if (classname) {
+          current.classList.add(classname);
+        }
+        this.link = current;
+      }
 
       // Push State in History
       window.history.pushState({ path: this.path }, '', this.path);
@@ -170,7 +199,8 @@ class Router {
    */
   fetchSuccess(result) {
     // Update Attributes
-    const page  = document.createRange().createContextualFragment(result);
+    // const page  = document.createRange().createContextualFragment(result);
+    const page  = new DOMParser().parseFromString(result, 'text/html');
     const title = page.querySelector('title').innerHTML;
     const root  = page.querySelector('[namespace]'); 
     const name  = root.getAttribute('namespace');
