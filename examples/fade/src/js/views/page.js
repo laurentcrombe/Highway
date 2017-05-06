@@ -2,8 +2,9 @@
 import Highway from 'highway';
 
 // Transition
-import Fade from '../transitions/fade';
+import Fade from 'transitions/fade';
 
+// Page Class
 class Page extends Highway.View {
   get transition() {
     return Fade;

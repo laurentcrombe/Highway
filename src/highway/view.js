@@ -1,8 +1,6 @@
 /**
  * Highway - View File:
- * This file contains the methods handling the display of your pages. It works
- * in pair with the `core.js` file so never forget to add both of them in your
- * project directory since they depend on each other.
+ * This file contains the methods handling the display of your pages.
  * 
  * @author: Anthodpnt <antho.dpnt@gmail.com>
  * @version: 1.0.0
@@ -12,28 +10,24 @@
 class View {
   /**
    * Constructor:
-   * Construct the class.
+   * Construct the View, get the `router-wrapper` and extract options.
+   * 
    * @param {object} options - The options
    */
   constructor(options) {
-    // Check Transition
-    if (typeof this.transition === 'undefined') {
-      throw new Error('Undefined Transitions');
-    }
+    // Wrapper
+    this.wrapper = document.querySelector('[router-wrapper]');
 
-    // Get Options
+    // Options
     this.title = options.title;
-    this.root  = options.root;
-    this.name  = options.name;
-
-    // Get Datas
-    this.wrapper = document.querySelector('.router-wrapper');
+    this.view = options.view;
   }
 
 
   /**
    * Initialisation:
-   * We call the enter completed method.
+   * We call the enter completed method. This is usefull for the landing page
+   * that does not pass through the router.
    */
   init() {
     // Enter Completed
@@ -43,90 +37,88 @@ class View {
 
   /**
    * Append:
-   * We append the view to DOM.
+   * We append the view content to the `router-wrapper` and we update the page
+   * title. 
    */
   append() {
     // Update Title
     document.title = this.title;
 
     // Append
-    this.wrapper.appendChild(this.root);
+    this.wrapper.appendChild(this.view);
   }
 
 
   /**
    * Remove:
-   * We remove the view from DOM.
+   * We remove the view content from the `router-wrapper`.
    */
   remove() {
     // Remove
-    this.wrapper.removeChild(this.root);
-
-    // Leave Completed
-    this.onLeaveCompleted();
+    this.wrapper.removeChild(this.view);
   }
 
 
   /**
    * Load:
-   * We load the view.
-   * @param {function} callback - The callback function
+   * We load the view content and call the transition `in`. Analytics are 
+   * updated as well if the GA script has been setup.
    */
-  load(callback) {
+  load() {
     // Enter
     this.onEnter();
 
-    // Transition In
-    this.tIn = new Promise((resolve, reject) => {
-      if (!this.transition.in) {
-        reject();
-        return;
-      }
-      this.transition.in(this.root, resolve);
-    });
+    // Append
+    this.append();
 
-    this.tIn
-      .then(this.init.bind(this))
-      .then(this.analytics.bind(this))
-      .then(callback)
-      .catch(() => {
-        throw new Error('Undefined Transition In');
+    // Promise for Async methods
+    return new Promise((resolve, reject) => {
+      // Transition
+      this.transition.in(this.view, () => {
+        // Resolve
+        resolve();
+
+        // Send GA
+        this.analytics();
+
+        // Enter Completed
+        this.onEnterCompleted();
       });
+    });
   }
 
 
   /**
    * Unload:
-   * We unload the view.
-   * @param {function} callback - The callback function
+   * We unload the view content and call the transition `out`.
    */
-  unload(callback) {
+  unload() {
     // Leave
     this.onLeave();
 
-    // Transition Out
-    this.tOut = new Promise((resolve, reject) => {
-      if (!this.transition.out) {
-        reject();
-        return;
-      }
-      this.transition.out(this.root, resolve);
-    });
+    // Promise for Async methods
+    return new Promise((resolve, reject) => {
+      // Transition
+      this.transition.out(this.view, () => {
+        // Resolve
+        resolve();
 
-    this.tOut
-      .then(callback)
-      .catch(() => {
-        throw new Error('Undefined Transition Out');
+        // Remove
+        this.remove();
+
+        // Leave Completed
+        this.onLeaveCompleted();
       });
+    });
   }
 
 
   /**
    * Analytics:
-   * We update GA if the script exists.
+   * We update GA if the script has been setup.
    */
   analytics() {
-    // Send Page View to GA if enabled
+    // Send Page View to GA
     if (typeof ga !== 'undefined') {
       ga('set', { page: window.location.pathname, title: document.title });
       ga('send', 'pageview');

@@ -7,11 +7,11 @@
  */
 
 
-import View from './highway/view';
-import Router from './highway/router';
+import View from 'highway/view';
+import Router from 'highway/router';
 
 const Highway = { 
-  View: View,
+  View  : View,
   Router: Router,
 };
 

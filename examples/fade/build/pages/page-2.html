@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Example - Fade</title>
+    <title>Page 2 - Fade</title>
     <meta charset="UTF-8">
   </head>
   <body>
@@ -11,15 +11,15 @@
       <header>
         <h4>HEADER</h4>
         <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/page.html">Page</a></li>
+          <li><a href="/" router-active="is-active">Home</a></li>
+          <li><a href="/page.html" router-active="is-active">Page</a></li>
         </ul>
       </header>
 
       <!-- Router Wrapper -->
-      <arcitcle class="router-wrapper">
-        <!-- Router Content -->
-        <div class="router-content" namespace="page">
+      <arcitcle router-wrapper>
+        <!-- Router View -->
+        <div router-view="page">
           <h4>PAGE 2</h4>
           <ul>
             <li><a href="/pages/page-1.html">Page 1</a></li>

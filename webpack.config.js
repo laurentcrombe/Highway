@@ -16,6 +16,9 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: '[name].min.js',
+    library: 'Highway',
+    libraryTarget: 'umd',
+    umdNamedDefine: true,
   },
   module: {
     rules: [

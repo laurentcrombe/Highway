@@ -1,10 +1,10 @@
-// Highway
+// Dependencies
 import Highway from 'highway';
 import TweenMax from 'gsap';
 
 // Views
-import Home from './views/home';
-import Page from './views/page';
+import Home from 'views/home';
+import Page from 'views/page';
 
 // App
 class App {
@@ -20,7 +20,4 @@ class App {
   }
 }
 
-// DOM Ready
-(() => {
-  const a = new App();
-})();
+new App();

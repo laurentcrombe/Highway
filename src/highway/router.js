@@ -1,8 +1,6 @@
 /**
  * Highway - Router File:
- * This file contains the methods handling the routing our your pages. It works
- * in pair with the `view.js` file so never forget to add both of them in your
- * project directory since they depend on each other.
+ * This file contains the methods handling the routing of your pages.
  * 
  * @author: Anthodpnt <antho.dpnt@gmail.com>
  * @version: 1.0.0
@@ -12,71 +10,72 @@
 class Router {
   /**
    * Constructor:
-   * Construct the class and initialise it.
-   * @param {object} options - The options
+   * Construct the Router, initialise it and extract options.
+   * 
+   * @param {object} options - The Options
    */
   constructor(options) {
-    // Attributes
+    // Options
     this.views = options.views;
     this.mode  = options.mode || 'out-in';
-    this.stack = {};
+
+    // Events
+    this.onPopstate   = this.popstate.bind(this);
+    this.onPathChange = this.change.bind(this);
+
+    // PopState
+    window.addEventListener('popstate', this.onPopstate);
 
     // Init
+    this.bind();
     this.init();
   }
 
 
   /**
    * Initialisation:
-   * We initialise the attributes and the current page class.
+   * When landing on the website the first page does'nt pass through the router
+   * so we need to initialise it as well as the attributes of our router.
    */
   init() {
-    // Update Attributes
+    // Attributes
     const title = document.querySelector('title').innerHTML;
-    const root  = document.querySelector('[namespace]');
-    const name  = root.getAttribute('namespace');
+    const view  = document.querySelector('[router-view]');
+    const name  = view.getAttribute('router-view');
 
-    this.path = window.location.pathname;
+    this.path  = window.location.pathname;
+    this.stack = {};
     this.stack[this.path] = {
       title: title,
-      root : root,
+      view : view,
       name : name,
     };
 
-    // Load Current View  
+    // Load Current  
     this.current = new this.views[name](this.stack[this.path]);
     this.current.init();
 
-    // Bind
-    this.bind();
+    // Active
+    for (let link of this.links) {
+      if (link.pathname === this.path) {
+        this.active(link);
+      }
+    }
   }
+
 
   /**
    * Binding:
    * We create events we bind on DOM elements.
    */
   bind() {
-    // Popstate
-    if (!this.onPopstate) {
-      // Create Event
-      this.onPopstate = this.popstate.bind(this);
+    // Get Links
+    this.links = document.querySelectorAll('a:not([router-disable])');
 
-      // Add Events on Window
-      window.addEventListener('popstate', this.onPopstate);
-    }
-
-    // Update
-    if (!this.onUpdate) {
-      // Get Links
-      const links = document.querySelectorAll('a:not([router-disable])');
-
-      // Create Events
-      this.onUpdate = this.update.bind(this);
-
-      // Add Events on DOM Links
-      for (let link of links) {
-        link.addEventListener('click', this.onUpdate);
-      }
+    // Add Events on DOM Links
+    for (let link of this.links) {
+      link.addEventListener('click', this.onPathChange);
+      link.addEventListener('touchstart', this.onPathChange);
     }
   }
 
@@ -86,25 +85,17 @@ class Router {
    * We remove events we bound on DOM elements.
    */
   unbind() {
-    // Update
-    if (this.onUpdate) {
-      // Get Links
-      const links = document.querySelectorAll('a:not([router-disable])');
-
-      // Remove Events from DOM Links
-      for (let link of links) {
-        link.removeEventListener('click', this.onUpdate);
-      }
-
-      // Clean up Events
-      this.onUpdate = null;
+    // Remove Events from DOM Links
+    for (let link of this.links) {
+      link.removeEventListener('click', this.onPathChange);
+      link.removeEventListener('touchstart', this.onPathChange);
     }
   }
 
 
   /**
    * Popstate:
-   * We fetch the path from the history state on `popstate` event
+   * We fetch the path from the window location on `popstate` event
    */
   popstate() {
     // Update Path
@@ -116,15 +107,41 @@ class Router {
 
 
   /**
-   * Update:
-   * We check when window location updates
-   * @param {object} event - The `click` event
+   * Active:
+   * Set active classnames on elements and remove previous active classname.
+   * 
+   * @param {object} el - The Element
    */
-  update(event) {
-    // Prevent event from Firing
-    event.preventDefault();
+  active(el) {
+    const classname = el.getAttribute('router-active');
 
-    // Get Path
+    if (classname) {
+      if (this.HTMLActive) {
+        const classname = this.HTMLActive.getAttribute('router-active');
+        this.HTMLActive.classList.remove(classname);
+      }
+
+      this.HTMLActive = el;
+      this.HTMLActive.classList.add(classname);
+    }
+  }
+
+
+  /**
+   * Change:
+   * We check when path changes on link `click` event 
+   * 
+   * @param {object} event - The `click` Event
+   */
+  change(event) {
+    // Prevent event from firing
+    event = event || window.event;
+    if (event.preventDefault) {
+      event.preventDefault();
+    }
+    event.returnValue = false;
+    
+    // Attributes
     const link   = event.currentTarget;
     const path   = link.getAttribute('href');
     const target = link.getAttribute('target');
@@ -133,36 +150,27 @@ class Router {
     // If the target is set to `_blank` the script stops otherwise it continues.
     if (target === '_blank') {
       // Open New Window
-      window.open(path, '_blank');
-      return;
+      return window.open(path, '_blank');
     }
 
+    // Update
+    this.update(path);
+  }
+
+
+  /**
+   * Update:
+   * We check when path updates.
+   * 
+   * @param {string} path - The Path
+   */
+  update(path) {
     // We check if the current link redirects to a different page than the
-    // displayed ones. If the two pages are different the script continues
+    // displayed one. If the two pages are different the script continues
     // otherwise the script stops.
     if (path !== this.path) {
       // Update Path
       this.path = path;
-
-      // Update Link
-      const current  = link;
-      const previous = this.link;
-
-      if (previous) {
-        const classname = previous.getAttribute('router-active');
-        if (classname) {
-          previous.classList.remove(classname);
-        }
-        this.link = null;
-      }
-
-      if (current) {
-        const classname = current.getAttribute('router-active');
-        if (classname) {
-          current.classList.add(classname);
-        }
-        this.link = current;
-      }
 
       // Push State in History
       window.history.pushState({ path: this.path }, '', this.path);
@@ -195,20 +203,20 @@ class Router {
   /**
    * Fetch Sucess:
    * We fetch update DOM on fetch success.
-   * @param {string} result - The page HTML
+   * 
+   * @param {string} result - The Page HTML
    */
   fetchSuccess(result) {
     // Update Attributes
-    // const page  = document.createRange().createContextualFragment(result);
-    const page  = new DOMParser().parseFromString(result, 'text/html');
+    const page  = document.createRange().createContextualFragment(result);
     const title = page.querySelector('title').innerHTML;
-    const root  = page.querySelector('[namespace]'); 
-    const name  = root.getAttribute('namespace');
+    const view  = page.querySelector('[router-view]'); 
+    const name  = view.getAttribute('router-view');
 
-    // Update History
+    // Update Stack
     this.stack[this.path] = {
       title: title,
-      root : root,
+      view : view,
       name : name,
     };
 
@@ -220,11 +228,11 @@ class Router {
   /**
    * Fetch Error:
    * We throw an error message on fetch error.
-   * @param {string} error - The error to display
+   * 
+   * @param {string} error - The Error
    */
   fetchError(error) {
-    // Fetch Failed
-    throw new Error(error);
+    throw Error(error);
   }
 
 
@@ -239,58 +247,42 @@ class Router {
     this.previous = this.current;
     this.current  = new this.views[name](this.stack[this.path]);
 
+    // Unbind Events
+    this.unbind();
+
     // Load/Unload Views
     switch (this.mode) {
+      // Both:
+      // Previous and current transitions run at the same time.
       case 'both':
-        // Unbind Events
-        this.unbind();
-
-        // Load Current
-        this.current.append();
         this.current.load();
-
-        // Unload Previous
-        this.previous.unload(() => {
-          // Destroy
-          this.previous.remove();
-
-          // Bind Events
-          this.bind();
-        });
-        break;
-      case 'in-out':
-        // Unbind Events
-        this.unbind();
-        
-        // Load Current
-        this.current.append();
-        this.current.load(() => {
-          // Unload Previous
-          this.previous.unload(() => {
-            // Destroy
-            this.previous.remove();
-
-            // Bind Events
-            this.bind();
+        this.previous.unload()
+          .then(this.bind)
+          .catch((e) => { 
+            throw Error(e);
           });
-        });
         break;
+      
+      // In-Out:
+      // Previous transition runs after current transition is over.
+      case 'in-out':
+        this.current.load()
+          .then(() => this.previous.unload())
+          .then(() => this.bind())
+          .catch((e) => {
+            throw Error(e);
+          });
+        break;
+
+      // Out-In:
+      // Current transition runs after previous transition is over (default).
       default:
-        // Unbind Events
-        this.unbind();
-
-        // Unload Previous
-        this.previous.unload(() => {
-          // Load Current
-          this.current.append();
-          this.current.load();
-
-          // Destroy
-          this.previous.remove();
-
-          // Bind Events
-          this.bind();
-        });
+        this.previous.unload()
+          .then(() => this.current.load())
+          .then(() => this.bind())
+          .catch((e) => {
+            throw Error(e);
+          });
     }
   }
 }
