@@ -68,54 +68,17 @@ yarn add highway.js
 ```
 
 ## Usage
-### Attributes
+### 1. Attributes
 
 Highway needs some **custom attributes** on your DOM elements to work properly.  
 Here are these attributes and how to use them to setup your DOM:
 
-**`[router-wrapper]`**
-
-Everytime `window.location` changes, Highway starts transitions and looks for the `[router-wrapper]` DOM element to find the `[router-view]` to remove and to append the one to display.
-
-The `[router-wrapper]` DOM element is **required**.
-
-```html
-<div router-wrapper></div>
-```
-
-**`[router-view]`**
-
-The `[router-view]` DOM element should **always be inside** the `[router-wrapper]`.  
-Everything contained in the `[router-view]` DOM element will be removed or appended on `window.location` change.
- 
-The `[router-view]` DOM element is **required** and takes **the name** of the view as value.
-
-```html
-<div router-wrapper>
-  <div router-view="my-view"></div>
-</div>
-``` 
-
-**`[router-active]`**
-
-The `[router-active]` attribute can be set on `<a>` DOM elements that needs an **active classname** when clicked.  
-The `[router-active]` attribute is **optional** and takes **the classname** to apply as value.
-
-```html
-<!-- Will apply `is-active` classname on click -->
-<a href="#" router-active="is-active"></a>
-``` 
-
-**`[router-disabled]`**
-
-Every `<a>` DOM element is a candidate to start the router. But you can disable the router on specific links with the `[router-disabled]` attribute.
-
-The `[router-disabled]` attribute is **optional**.
-
-```html
-<!-- Will disable router -->
-<a href="#" router-disabled></a>
-```
+| Attributes          | Description      | Value      | Required  |
+|---------------------|------------------|------------|-----------|
+| `[router-wrapper]`  | Contain Views    | N/A        | **YES**   |
+| `[router-view]`     | Contain View DOM | View Name  | **YES**   |
+| `[router-active]`   | Add Active Class | Class Name | **NO**    |
+| `[router-disabled]` | Disable Router   | N/A        | **NO**    |
 
 Note that the router will be automatically **disabled** when `target="_blank"`.
 
@@ -145,13 +108,17 @@ Here is a **sample structure** combining all these attributes:
 </main>
 ```
 
-### Transitions
+### 2. Transitions
 
 Transition are objects with `in` and `out` methods.  
-These methods take arguments given by the router. You don't even need to care about them but don't forget them.
+These methods take arguments given by the router. **You don't even need to care about them but don't forget them**.
 
-- `el`: This is the view to transition.
-- `completed`: This is the callback method you **must call** when transition is done.
+| Arguments  | Description                                               |
+|------------|-----------------------------------------------------------|
+| `el`       | View DOM you can use for your transition                  |
+| `complete` | Callback method you **must call** when transition is over |
+
+Here is a **sample structure** of a transition:
 
 ```js
 const TransitionName = {
@@ -168,15 +135,15 @@ export default TransitionName;
 
 Your can find more [examples here](#examples).
 
-Besides Highway gives you a way to choose the **mode** of your transitions that you can set when you [create your router](#router).
+Besides you can set the **mode** of your transitions when you [create your router](#router).
 
-| Mode              | Description                |
-|:-----------------:|:--------------------------:|
-| out-in (default)  | Transition Out **THEN** In |
-| in-out            | Transition In **THEN** Out |
-| both              | Transition In **AND** Out  |
+| Mode              | Description                            |
+|-------------------|----------------------------------------|
+| out-in            | Transition Out **THEN** In *(default)* |
+| in-out            | Transition In **THEN** Out             |
+| both              | Transition In **AND** Out              |
 
-### Views
+### 3. Views
 
 `View.onEnter()`
 
@@ -186,9 +153,9 @@ Besides Highway gives you a way to choose the **mode** of your transitions that 
 
 `View.onLeaveCompleted()`
 
-### Analytics
+### 4. Analytics
 
-### Router
+### 5. Router
 
 ## Examples
 
