@@ -1,6 +1,6 @@
 ## Highway
 
-Highway is a light-weight (**1.8kb** *minified and gzipped*), dependency-free, complete and easy-to-use **Router** writtent in **ES6**.
+Highway is a lightweight (**1.8kb** *minified and gzipped*), dependency-free, complete and easy-to-use **Router** writtent in **ES6**.
 
 ## Table of Contents
 
@@ -8,7 +8,7 @@ Highway is a light-weight (**1.8kb** *minified and gzipped*), dependency-free, c
 - [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
-	- [Setup](#setup) 
+	- [Setup](#setup)
 	- [Transitions](#transitions)
 	- [Views](#views)
 	- [Methods](#methods)
@@ -22,7 +22,14 @@ Highway is a light-weight (**1.8kb** *minified and gzipped*), dependency-free, c
 ## Installation
 
 ## Usage
-### Setup
+### Attributes
+`[router-wrapper]`
+
+`[router-view]`
+
+`[router-active]`
+
+`[router-disabled]`
 
 ### Transitions
 

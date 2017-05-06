@@ -70,7 +70,7 @@ class Router {
    */
   bind() {
     // Get Links
-    this.links = document.querySelectorAll('a:not([router-disable])');
+    this.links = document.querySelectorAll('a:not([router-disabled])');
 
     // Add Events on DOM Links
     for (let link of this.links) {
