@@ -70,39 +70,33 @@ yarn add highway.js
 ## Usage
 ### Attributes
 
-Highway needs some **custom attributes** on your DOM elements to work properly.
-Here are these attributes and how to use them to setup your DOM.
+Highway needs some **custom attributes** on your DOM elements to work properly.  
+Here are these attributes and how to use them to setup your DOM:
 
-**1. `[router-wrapper]`**
+**`[router-wrapper]`**
 
-Everytime `window.location` changes, Highway starts transitions and looks into the `[router-wrapper]` DOM element and finds the `[router-view]` to remove and append the one to display.
-
-The `[router-wrapper]` DOM element is **required** and takes **no value**.
+Everytime `window.location` changes, Highway starts transitions and looks for the `[router-wrapper]` DOM element to find the `[router-view]` to remove and to append the one to display.  
+The `[router-wrapper]` DOM element is **required**.
 
 ```html
-<div router-wrapper>
-	[...]
-</div>
+<div router-wrapper></div>
 ```
 
-**2.`[router-view]`**
+**`[router-view]`**
 
-The `[router-view]` DOM element should **always be inside** the `[router-wrapper]`. Everything contained in the `[router-view]` DOM element included will be removed or appended on `window.location` change.
-
+The `[router-view]` DOM element should **always be inside** the `[router-wrapper]`.  
+Everything contained in the `[router-view]` DOM element will be removed or appended on `window.location` change.  
 The `[router-view]` DOM element is **required** and takes **the name** of the view as value.
 
 ```html
 <div router-wrapper>
-	<div router-view="my-view">
-		[...]
-	</div>
+  <div router-view="my-view"></div>
 </div>
 ``` 
 
-**3.`[router-active]`**
+**`[router-active]`**
 
-The `[router-active]` attribute can be set on `<a>` DOM elements that needs an **active classname** when clicked.
-
+The `[router-active]` attribute can be set on `<a>` DOM elements that needs an **active classname** when clicked.  
 The `[router-active]` attribute is **optional** and takes **the classname** to apply as value.
 
 ```html
@@ -110,11 +104,10 @@ The `[router-active]` attribute is **optional** and takes **the classname** to a
 <a href="#" router-active="is-active"></a>
 ``` 
 
-**4.`[router-disabled]`**
+**`[router-disabled]`**
 
-Every `<a>` DOM element is a candidate to start the router. But you can disable the router on specific links with the `[router-disabled]` attribute.
-
-The `[router-disabled]` attribute is **optional** and takes **no value**.
+Every `<a>` DOM element is a candidate to start the router. But you can disable the router on specific links with the `[router-disabled]` attribute.  
+The `[router-disabled]` attribute is **optional**.
 
 ```html
 <!-- Will disable router -->
