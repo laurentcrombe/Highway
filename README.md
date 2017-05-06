@@ -75,7 +75,8 @@ Here are these attributes and how to use them to setup your DOM:
 
 **`[router-wrapper]`**
 
-Everytime `window.location` changes, Highway starts transitions and looks for the `[router-wrapper]` DOM element to find the `[router-view]` to remove and to append the one to display.  
+Everytime `window.location` changes, Highway starts transitions and looks for the `[router-wrapper]` DOM element to find the `[router-view]` to remove and to append the one to display.
+
 The `[router-wrapper]` DOM element is **required**.
 
 ```html
@@ -85,7 +86,8 @@ The `[router-wrapper]` DOM element is **required**.
 **`[router-view]`**
 
 The `[router-view]` DOM element should **always be inside** the `[router-wrapper]`.  
-Everything contained in the `[router-view]` DOM element will be removed or appended on `window.location` change.  
+Everything contained in the `[router-view]` DOM element will be removed or appended on `window.location` change.
+ 
 The `[router-view]` DOM element is **required** and takes **the name** of the view as value.
 
 ```html
@@ -100,13 +102,14 @@ The `[router-active]` attribute can be set on `<a>` DOM elements that needs an *
 The `[router-active]` attribute is **optional** and takes **the classname** to apply as value.
 
 ```html
-<!-- Will apply `is-active` class on click -->
+<!-- Will apply `is-active` classname on click -->
 <a href="#" router-active="is-active"></a>
 ``` 
 
 **`[router-disabled]`**
 
-Every `<a>` DOM element is a candidate to start the router. But you can disable the router on specific links with the `[router-disabled]` attribute.  
+Every `<a>` DOM element is a candidate to start the router. But you can disable the router on specific links with the `[router-disabled]` attribute.
+
 The `[router-disabled]` attribute is **optional**.
 
 ```html
@@ -114,7 +117,36 @@ The `[router-disabled]` attribute is **optional**.
 <a href="#" router-disabled></a>
 ```
 
-Note that the router will be automatically **disabled** when `target="_blank"`. 
+Note that the router will be automatically **disabled** when `target="_blank"`.
+
+Here is a sample structure combining all these attributes:
+
+```html
+<main>
+  <!-- Header -->
+  <!-- No transition applied -->
+  <header>
+  	<ul>
+  	  <li><a href="#" router-active="is-active"></a></li>
+  	  <li><a href="#" router-active="is-active"></a></li>
+  	  <li><a href="#" router-disabled></a></li>
+  	</ul>
+  </header>
+  
+  <!-- Router Wrapper -->
+  <div router-wrapper>
+    <!-- Router View -->
+    <!-- Transition applied -->
+    <div router-view="my-view">
+      <h1>My View</h1>
+    </div>
+  </div>
+  
+  <!-- Footer -->
+  <!-- No transition applied -->
+  <footer></footer>
+</main>
+```
 
 ### Transitions
 `out-in`
