@@ -8,11 +8,11 @@ Highway is a lightweight (**1.8kb** *minified and gzipped*), dependency-free, co
 - [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
-	- [Setup](#setup)
+	- [Attributes](#attributes)
 	- [Transitions](#transitions)
 	- [Views](#views)
-	- [Methods](#methods)
 	- [Analytics](#analytics)
+	- [Router](#router)
 - [License](#license)
 
 ## How it works
