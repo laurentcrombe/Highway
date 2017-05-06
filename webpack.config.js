@@ -6,7 +6,7 @@ const path = require('path');
 const del  = require('del');
 
 // Clean Up Build
-del(path.resolve(__dirname, 'build'), { force: true });
+del(path.resolve(__dirname, 'dist'), { force: true });
 
 // Configuration
 module.exports = {
@@ -14,7 +14,7 @@ module.exports = {
     highway: path.resolve(__dirname, 'src/highway.js'),
   },
   output: {
-    path: path.resolve(__dirname, 'build'),
+    path: path.resolve(__dirname, 'dist'),
     filename: '[name].min.js',
     library: 'Highway',
     libraryTarget: 'umd',

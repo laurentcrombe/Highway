@@ -3,7 +3,7 @@ const path = require('path');
 const del  = require('del');
 
 // Clean Up Build
-del(path.resolve(__dirname, 'build/js'), { force: true });
+del(path.resolve(__dirname, 'dist/js'), { force: true });
 
 // Configuration
 module.exports = {
@@ -11,7 +11,7 @@ module.exports = {
     main: path.resolve(__dirname, 'src/js/main.js'),
   },
   output: {
-    path: path.resolve(__dirname, 'build/js'),
+    path: path.resolve(__dirname, 'dist/js'),
     filename: '[name].min.js',
   },
   module: {
