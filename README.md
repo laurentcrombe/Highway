@@ -121,10 +121,10 @@ Here is a **sample structure** of a transition:
 
 ```js
 const TransitionName = {
-  in: (el, complete) {
+  in: (view, complete) {
     // Transition In
   },
-  out: (el, complete) {
+  out: (view, complete) {
     // Transition Out
   },
 };
