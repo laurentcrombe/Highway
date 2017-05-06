@@ -27,6 +27,9 @@ module.exports = {
     ],
   },
   resolve: {
+    alias: {
+      highway: 'highway.js/dist/highway.min',
+    },
     modules: [
       '.',
       'src',
