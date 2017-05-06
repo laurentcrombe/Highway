@@ -123,25 +123,25 @@ Here is a **sample structure** combining all these attributes:
 
 ```html
 <main>
-  <!-- Header - No transition -->
-  <header>
-    <ul>
-  	  <li><a href="#" router-active="is-active"></a></li>
-  	  <li><a href="#" router-active="is-active"></a></li>
-  	  <li><a href="#" router-disabled></a></li>
-    </ul>
-  </header>
-  
-  <!-- Router Wrapper -->
-  <div router-wrapper>
-    <!-- Router View - Transition -->
-    <div router-view="my-view">
-      <h1>My View</h1>
-    </div>
-  </div>
-  
-  <!-- Footer - No transition -->
-  <footer></footer>
+	<!-- Header - No transition -->
+	<header>
+		<ul>
+			<li><a href="#" router-active="is-active"></a></li>
+			<li><a href="#" router-active="is-active"></a></li>
+			<li><a href="#" router-disabled></a></li>
+		</ul>
+	</header>
+	
+	<!-- Router Wrapper -->
+	<div router-wrapper>
+		<!-- Router View - Transition -->
+		<div router-view="my-view">
+			<h1>My View</h1>
+		</div>
+	</div>
+	
+	<!-- Footer - No transition -->
+	<footer></footer>
 </main>
 ```
 
@@ -156,7 +156,7 @@ These methods take arguments given by the router. You don't even need to care ab
 ```js
 const TransitionName = {
   in: (el, complete) {
-    // Transition In
+  	// Transition In
   },
   out: (el, complete) {
   	// Transition Out
@@ -166,6 +166,7 @@ const TransitionName = {
 export default TransitionName;
 ```
 
+Your can find more [examples here](#examples).  
 Besides Highway gives you a way to choose the **mode** of your transitions that you can set when you [create your router](#router).
 
 | Mode              | Description                |
