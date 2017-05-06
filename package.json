@@ -9,9 +9,9 @@
     "javascript",
     "es6"
   ],
-  "main": "highway.js",
+  "main": "dist/highway.js",
   "scripts": {
-    "test": "npm run test"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",

@@ -11,11 +11,12 @@ del(path.resolve(__dirname, 'dist'), { force: true });
 // Configuration
 module.exports = {
   entry: {
-    highway: path.resolve(__dirname, 'src/highway.js'),
+    'highway': path.resolve(__dirname, 'src/highway.js'),
+    'highway.min': path.resolve(__dirname, 'src/highway.js'),
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].min.js',
+    filename: '[name].js',
     library: 'Highway',
     libraryTarget: 'umd',
     umdNamedDefine: true,
@@ -41,7 +42,14 @@ module.exports = {
     extensions: ['.js'],
   },
   plugins: [
-    new CompressionPlugin(),
-    new UglifyJSPlugin(),
+    new CompressionPlugin({
+      test: /\.min\.js$/,
+      algorithm: 'gzip',
+    }),
+    new UglifyJSPlugin({
+      include: /\.min\.js$/,
+      minimize: true,
+    }),
   ],
+  devtool: 'source-map',
 };

@@ -4,5 +4,5 @@
 # Modules
 node_modules/
 
-# Files
-.npmignore
+# Folders
+examples/**/dist/js
