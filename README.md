@@ -114,7 +114,7 @@ These methods take arguments given by the router. **You don't even need to care 
 
 | Arguments  | Description                                               |
 |------------|-----------------------------------------------------------|
-| `el`       | View DOM you can use for your transition                  |
+| `view`     | View DOM you can use for your transition                  |
 | `complete` | Callback method you **must call** when transition is over |
 
 Here is a **sample structure** of a transition:
