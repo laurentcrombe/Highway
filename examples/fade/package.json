@@ -1,11 +1,13 @@
 {
   "name": "highway",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Highway is an light-weight JS Router",
-  "main": "highway.js",
-  "scripts": {},
+  "main": "src/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "author": "Anthodpnt <antho.dpnt@gmail.com>",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "babel": "^6.23.0",
     "babel-core": "^6.24.1",
