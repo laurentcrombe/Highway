@@ -19,7 +19,7 @@ module.exports = {
       {
         test: /\.js?$/,
         loader: 'babel-loader',
-        exclude: ['node_modules'],
+        exclude: ['node_modules', 'bower_components'],
         options: {
           presets: ['env', ['es2015', { 'modules': false }]],
         },
@@ -35,6 +35,7 @@ module.exports = {
       '.',
       'src',
       'node_modules',
+      'bower_components',
     ],
     extensions: ['.js'],
   },

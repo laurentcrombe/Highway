@@ -1,0 +1,24 @@
+{
+  "name": "highway.js",
+  "description": "Highway is an light-weight JS Router",
+  "main": "dist/highway.js",
+  "authors": [
+    "Anthony Du Pont <antho.dpnt@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "router",
+    "transitions",
+    "navigation",
+    "javascript",
+    "es6"
+  ],
+  "homepage": "https://github.com/Anthodpnt/Highway",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
