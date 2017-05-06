@@ -133,15 +133,14 @@ const TransitionName = {
 export default TransitionName;
 ```
 
-Your can find more [examples here](#examples).
+Your can find more [examples here](#examples).  
+Besides you can set the **mode** of your transitions when you [create your router](#5-router).
 
-Besides you can set the **mode** of your transitions when you [create your router](#router).
-
-| Mode              | Description                            |
-|-------------------|----------------------------------------|
-| out-in            | Transition Out **THEN** In *(default)* |
-| in-out            | Transition In **THEN** Out             |
-| both              | Transition In **AND** Out              |
+| Mode                | Description                            |
+|---------------------|----------------------------------------|
+| out-in *(default)*  | Transition Out **THEN** In             |
+| in-out              | Transition In **THEN** Out             |
+| both                | Transition In **AND** Out              |
 
 ### 3. Views
 
