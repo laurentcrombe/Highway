@@ -11,7 +11,7 @@
   ],
   "main": "highway.js",
   "scripts": {
-    "test": "npm run test",
+    "test": "npm run test"
   },
   "repository": {
     "type": "git",
