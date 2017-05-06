@@ -123,25 +123,25 @@ Here is a **sample structure** combining all these attributes:
 
 ```html
 <main>
-	<!-- Header - No transition -->
-	<header>
-		<ul>
-			<li><a href="#" router-active="is-active"></a></li>
-			<li><a href="#" router-active="is-active"></a></li>
-			<li><a href="#" router-disabled></a></li>
-		</ul>
-	</header>
+ <!-- Header - No transition -->
+ <header>
+  <ul>
+   <li><a href="#" router-active="is-active"></a></li>
+   <li><a href="#" router-active="is-active"></a></li>
+   <li><a href="#" router-disabled></a></li>
+  </ul>
+ </header>
 	
-	<!-- Router Wrapper -->
-	<div router-wrapper>
-		<!-- Router View - Transition -->
-		<div router-view="my-view">
-			<h1>My View</h1>
-		</div>
-	</div>
+ <!-- Router Wrapper -->
+ <div router-wrapper>
+  <!-- Router View - Transition -->
+  <div router-view="my-view">
+   <h1>My View</h1>
+  </div>
+ </div>
 	
-	<!-- Footer - No transition -->
-	<footer></footer>
+ <!-- Footer - No transition -->
+ <footer></footer>
 </main>
 ```
 
