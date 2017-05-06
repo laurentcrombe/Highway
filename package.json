@@ -2,10 +2,26 @@
   "name": "highway",
   "version": "1.0.0",
   "description": "Highway is an light-weight JS Router",
+  "keywords": [
+    "router",
+    "transitions",
+    "navigation",
+    "javascript",
+    "es6"
+  ],
   "main": "highway.js",
-  "scripts": {},
-  "author": "Anthodpnt <antho.dpnt@gmail.com>",
-  "license": "ISC",
+  "scripts": {
+    "test": "npm run test",
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Anthodpnt/Highway"
+  },
+  "bugs": {
+    "url": "https://github.com/Anthodpnt/Highway/issues"
+  },
+  "author": "Anthony Du Pont <antho.dpnt@gmail.com>",
+  "license": "MIT",
   "devDependencies": {
     "babel": "^6.23.0",
     "babel-core": "^6.24.1",
