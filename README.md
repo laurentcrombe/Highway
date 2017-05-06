@@ -119,16 +119,16 @@ The `[router-disabled]` attribute is **optional**.
 
 Note that the router will be automatically **disabled** when `target="_blank"`.
 
-Here is a sample structure combining all these attributes:
+Here is a **sample structure** combining all these attributes:
 
 ```html
 <main>
   <!-- Header - No transition -->
   <header>
     <ul>
-  	   <li><a href="#" router-active="is-active"></a></li>
-  	   <li><a href="#" router-active="is-active"></a></li>
-  	   <li><a href="#" router-disabled></a></li>
+  	  <li><a href="#" router-active="is-active"></a></li>
+  	  <li><a href="#" router-active="is-active"></a></li>
+  	  <li><a href="#" router-disabled></a></li>
     </ul>
   </header>
   
@@ -146,11 +146,33 @@ Here is a sample structure combining all these attributes:
 ```
 
 ### Transitions
-`out-in`
 
-`in-out`
+Transition are objects with `in` and `out` methods.  
+These methods take arguments given by the router. You don't even need to care about them but don't forget them.
 
-`both`
+- `el`: This is the view to transition.
+- `completed`: This is the callback method you **must call** when transition is done.
+
+```js
+const TransitionName = {
+  in: (el, complete) {
+    // Transition In
+  },
+  out: (el, complete) {
+  	// Transition Out
+  },
+};
+
+export default TransitionName;
+```
+
+Besides Highway gives you a way to choose the **mode** of your transitions that you can set when you [create your router](#router).
+
+| Mode              | Description                |
+|:-----------------:|:--------------------------:|
+| out-in (default)  | Transition Out **THEN** In |
+| in-out            | Transition In **THEN** Out |
+| both              | Transition In **AND** Out  |
 
 ### Views
 
@@ -163,6 +185,8 @@ Here is a sample structure combining all these attributes:
 `View.onLeaveCompleted()`
 
 ### Analytics
+
+### Router
 
 ## Examples
 
