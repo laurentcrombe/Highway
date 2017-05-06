@@ -155,12 +155,12 @@ These methods take arguments given by the router. You don't even need to care ab
 
 ```js
 const TransitionName = {
- in: (el, complete) {
-  // Transition In
- },
- out: (el, complete) {
-  // Transition Out
- },
+  in: (el, complete) {
+    // Transition In
+  },
+  out: (el, complete) {
+    // Transition Out
+  },
 };
 
 export default TransitionName;
