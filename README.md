@@ -80,8 +80,7 @@ Here are these attributes and how to use them to setup your DOM:
 | `[router-active]`   | Add Active Class | Class Name | **NO**    |
 | `[router-disabled]` | Disable Router   | N/A        | **NO**    |
 
-Note that the router will be automatically **disabled** when `target="_blank"`.
-
+Note that the router will be automatically **disabled** when `target="_blank"`.  
 Here is a **sample structure** combining all these attributes:
 
 ```html
