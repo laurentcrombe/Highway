@@ -27,7 +27,45 @@ Everytime a user will click a link, the requested page will be loaded in **Ajax*
 
 ## Features
 
+- Modern & lightweight
+- Clean & extensible
+- Setup in seconds
+- Create views is so simple...
+- ... Oh! And transitions as well
+- Transitions mode (out-in, in-out or both)
+- Minimum HTTP Requests
+- Cache visited pages
+- No dependencies
+- ...
+
+
 ## Installation
+
+Highway supports *Universal Module Definition (UMD)* and can be installed:
+
+**1. Using [NPM](https://www.npmjs.com/get-npm)**:
+
+```
+npm install highway.js --save
+```
+
+**2. Using [Bower](https://bower.io/)**:
+
+```
+bower install highway.js --save
+```
+
+**3. Using [Yarn](https://yarnpkg.com/en/)**:
+
+```
+yarn add highway.js
+```
+
+**4. Standalone**:
+
+```html
+<script type="text/javascript" src="highway.min.js"></script>
+```
 
 ## Usage
 ### Attributes
@@ -40,6 +78,11 @@ Everytime a user will click a link, the requested page will be loaded in **Ajax*
 `[router-disabled]`
 
 ### Transitions
+`out-in`
+
+`in-out`
+
+`both`
 
 ### Views
 
