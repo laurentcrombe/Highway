@@ -190,7 +190,7 @@ var Router = function () {
     key: 'bind',
     value: function bind() {
       // Get Links
-      this.links = document.querySelectorAll('a:not([router-disable])');
+      this.links = document.querySelectorAll('a:not([router-disabled])');
 
       // Add Events on DOM Links
       var _iteratorNormalCompletion2 = true;
@@ -535,7 +535,9 @@ var View = function () {
     key: 'init',
     value: function init() {
       // Enter Completed
-      this.onEnterCompleted();
+      if (this.onEnterCompleted) {
+        this.onEnterCompleted();
+      }
     }
 
     /**
@@ -578,7 +580,9 @@ var View = function () {
       var _this = this;
 
       // Enter
-      this.onEnter();
+      if (this.onEnter) {
+        this.onEnter();
+      }
 
       // Append
       this.append();
@@ -594,7 +598,9 @@ var View = function () {
           _this.analytics();
 
           // Enter Completed
-          _this.onEnterCompleted();
+          if (_this.onEnterCompleted) {
+            _this.onEnterCompleted();
+          }
         });
       });
     }
@@ -610,7 +616,9 @@ var View = function () {
       var _this2 = this;
 
       // Leave
-      this.onLeave();
+      if (this.onLeave) {
+        this.onLeave();
+      }
 
       // Promise for Async methods
       return new Promise(function (resolve, reject) {
@@ -623,7 +631,9 @@ var View = function () {
           _this2.remove();
 
           // Leave Completed
-          _this2.onLeaveCompleted();
+          if (_this2.onLeaveCompleted) {
+            _this2.onLeaveCompleted();
+          }
         });
       });
     }

@@ -145,7 +145,7 @@ Besides you can set the **mode** of your transitions when you [create your route
 ### 3. Views
 
 Views are [ES6 Classes](https://ponyfoo.com/articles/es6#classes) that extends the `Highway.View` class. Each view has a **serie of methods** to give you the ability to manage your view along the process of the transition.  
-Here are the list of these methods:
+Here is the list of these methods:
 
 | Arguments                 | Description                                                        |
 |---------------------------|--------------------------------------------------------------------|

@@ -31,7 +31,9 @@ class View {
    */
   init() {
     // Enter Completed
-    this.onEnterCompleted();
+    if (this.onEnterCompleted) {
+      this.onEnterCompleted();
+    }
   }
 
 
@@ -66,7 +68,9 @@ class View {
    */
   load() {
     // Enter
-    this.onEnter();
+    if (this.onEnter) {
+      this.onEnter();
+    }
 
     // Append
     this.append();
@@ -82,7 +86,9 @@ class View {
         this.analytics();
 
         // Enter Completed
-        this.onEnterCompleted();
+        if (this.onEnterCompleted) {
+          this.onEnterCompleted();
+        }
       });
     });
   }
@@ -94,7 +100,9 @@ class View {
    */
   unload() {
     // Leave
-    this.onLeave();
+    if (this.onLeave) {
+      this.onLeave();
+    }
 
     // Promise for Async methods
     return new Promise((resolve, reject) => {
@@ -107,7 +115,9 @@ class View {
         this.remove();
 
         // Leave Completed
-        this.onLeaveCompleted();
+        if (this.onLeaveCompleted) {
+          this.onLeaveCompleted();
+        }
       });
     });
   }
