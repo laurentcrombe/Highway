@@ -130,11 +130,11 @@ export default TransitionName;
 Your can find more [examples here](#examples).  
 Besides you can set the **mode** of your transitions when you [create your router](#5-router).
 
-| Mode                | Description                            |
-|---------------------|----------------------------------------|
-| out-in *(default)*  | Transition Out **THEN** In             |
-| in-out              | Transition In **THEN** Out             |
-| both                | Transition In **AND** Out              |
+| Mode                  | Description                            |
+|-----------------------|----------------------------------------|
+| `out-in` *(default)*  | Out Transition **THEN** In Transition  |
+| `in-out`              | In Transition **THEN** Out Transition  |
+| `both`                | In Transition **AND** Out Transition   |
 
 ### 3. Views
 
@@ -217,7 +217,7 @@ Now your know how to create [your views](#3-views) and [your transitions](#2-tra
 
 | Value                     | Type            | Description                                      |
 |---------------------------|-----------------|--------------------------------------------------|
-| `views`                   | `object`        | The list of views (`[name]: [class]`)            |
+| `views`                   | `object`        | The list of views (`[name]:[class]`)            |
 | `mode`                    | `string`        | The transition mode (`out-in`, `in-out`, `both`) |
 
 Note that the `[name]` in the `views` object refers to the value you passed to the `[router-view]` and the `[class]` refers to your view class.
