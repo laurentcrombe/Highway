@@ -256,7 +256,7 @@ Highway supports modern browser supporting these features:
 - Fetch API ([Caniuse](https://caniuse.com/#feat=fetch))
 - Promises ([Caniuse](https://caniuse.com/#feat=promises))
 
-For older browsers there are plenty of polyfills, these are my favorites:
+For older browsers there are plenty of **polyfills**, these are my favorites:
 - [Fetch API](https://github.com/github/fetch)
 - [Promises](https://babeljs.io/docs/usage/polyfill/)
 
