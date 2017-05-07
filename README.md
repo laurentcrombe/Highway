@@ -13,6 +13,7 @@ Highway is a lightweight (**1.8kb** *minified and gzipped*), dependency-free, co
 	- [Views](#3-views)
 	- [Analytics](#4-analytics)
 	- [Router](#5-router)
+- [Browser Support](#browser-support)
 - [License](#license)
 
 ## How it works
@@ -143,13 +144,17 @@ Besides you can set the **mode** of your transitions when you [create your route
 
 ### 3. Views
 
-`View.onEnter()`
+Views are [ES6 Classes](https://ponyfoo.com/articles/es6#classes) that extends the `Highway.View` class. Each view has a **serie of methods** to give you the ability to manage your view along the process of the transition.  
+Here are the list of these methods:
 
-`View.onLeave()`
+| Arguments                 | Description                                                        |
+|---------------------------|--------------------------------------------------------------------|
+| `View.onEnter()`          | Fire when the requested view is added to the `[router-wrapper]`    |
+| `View.onLeave()`          | Fire when the previous view's `out` transition starts              |
+| `View.onEnterCompleted()` | Fire when the requested view's `in` transition is over             |
+| `View.onLeaveCompleted()` | Fire when the previous view is removed from the `[router-wrapper]` |
 
-`View.onEnterCompleted()`
-
-`View.onLeaveCompleted()`
+Your can name your views as you want or name them with the value of the corresponding `[router-view]` DOM Element with a capital letter.
 
 ### 4. Analytics
 
@@ -158,6 +163,8 @@ Besides you can set the **mode** of your transitions when you [create your route
 ## Examples
 
 - [Fade](https://github.com/Anthodpnt/Highway/tree/master/examples/fade)
+
+## Browser Support
 
 ## License
 
