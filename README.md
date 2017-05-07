@@ -264,8 +264,8 @@ For older browsers there are plenty of **polyfills**, these are my favorites:
 
 ## Contributors
 
-- [Anthodpnt](https://github.com/Anthodpnt) - Owner
-- [fabricelejeune](https://github.com/fabricelejeune) - Support & Advices
+- [Anthodpnt](https://github.com/Anthodpnt) - Owner - [Twitter](https://twitter.com/Anthodpnt)
+- [fabricelejeune](https://github.com/fabricelejeune) - Support & Advices - [Twitter](https://twitter.com/fabricelejeune)
 
 ## License
 
