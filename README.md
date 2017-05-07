@@ -1,6 +1,6 @@
 ## Highway
 
-Highway is a lightweight (**1.8kb** *minified and gzipped*), dependency-free, complete and easy-to-use **Router** written in **ES6**.
+Highway is a lightweight (**1.8kb** *minified and gzipped*), dependency-free and easy-to-use **Router** written in **ES6**.
 
 ## Table of Contents
 
@@ -212,6 +212,38 @@ class MyView extends Highway.View {
 ```
 
 ### 5. Router
+
+Now your know how to create [your views](#views) and [your transitions](#transitions) so let me explain you **how to create the router itself**. This is quite simple, all you need to do is create a new instance of the `Highway.Router`. It takes an **object** as only parameter with these values:
+
+| Value                     | Type            | Description                                      |
+|---------------------------|--------------------------------------------------------------------|
+| `views`                   | `object`        | The list of views (`[name]: [class]`)            |
+| `mode`                    | `string`        | The transition mode (`out-in`, `in-out`, `both`) |
+
+Note that the `[name]` in the `views` object refers to the value you passed to the `[router-view]` and the `[class]` refers to your view class.  
+Here is a **sample code** to instanciate your router:
+
+```javascript
+// Import Highway
+import Highway from 'path/to/highway.js';
+
+// Import Views
+import MyView from 'path/to/MyView.js';
+
+class App {
+  constructor() {
+    // Create the Router
+    this.Router = new Highway.Router({
+      views: {
+        'my-view': MyView,
+      },
+      mode: 'both',
+    });
+  }
+}
+
+new App();
+```
 
 ## Examples
 
