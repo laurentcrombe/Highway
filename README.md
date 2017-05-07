@@ -15,6 +15,7 @@ Highway is a lightweight (**1.8kb** *minified and gzipped*), dependency-free and
 	- [Router](#5-router)
 - [Examples](#examples)
 - [Browser Support](#browser-support)
+- [Contributors](#contributors)
 - [License](#license)
 
 ## How it works
@@ -260,6 +261,11 @@ Highway supports modern browser supporting these features:
 For older browsers there are plenty of **polyfills**, these are my favorites:
 - [Fetch API](https://github.com/github/fetch)
 - [Promises](https://babeljs.io/docs/usage/polyfill/)
+
+## Contributiors
+
+- [Anthodpnt](https://github.com/Anthodpnt) - Creator
+- [fabricelejeune](https://github.com/fabricelejeune) - Support & Advices
 
 ## License
 
