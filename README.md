@@ -162,7 +162,7 @@ import TransitionName from 'path/to/TransitionName.js'
 // The View
 class MyView extends Highway.View {
   get transition() {
-    // The `transition getter (required)
+    // The `transition` getter (required)
     return TransitionName;
   }
   
@@ -176,6 +176,40 @@ export default MyView;
 ```
 
 ### 4. Analytics
+
+The `Highway.View` has an `analytics` method that is extended to all your views.  
+This method send a new `pageview` event to your Google Analytics when the `in` transition of your view is over and **only if you have specified** a GA script tag in the `head` of your website.
+
+```javascript
+// [...]
+  analytics() {
+    // Send Page View to GA
+    if (typeof ga !== 'undefined') {
+      ga('set', { page: window.location.pathname, title: document.title });
+      ga('send', 'pageview');
+    }
+  }
+// [...]
+```
+Note that this method can be overwritten in your view class if you need to change the code in order to fit your needs.  
+This can be done like so:
+
+``` javascript
+// [...]
+class MyView extends Highway.View {
+  // [...]
+  analytics() {
+    // Keep this line if you want to keep the default code and add more code 
+    // beneath it. If you don't want to keep the default code and completely
+    // overwrite the method, you can remove this line.
+    super.analytics();
+    
+    // Add your code here
+  }
+  // [...]
+}
+// [...]
+```
 
 ### 5. Router
 
