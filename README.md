@@ -24,7 +24,7 @@ The default behavior of your browser reloading the page everytime the window loc
 
 Highway is a lightweight (**1.8kb** *minified and gzipped*), dependency-free, complete and easy-to-use **Router** written in **ES6**. It will never be so easy to add transitions to your websites. The only limit is **your imagination**.
 
-Everytime the window location changes, the requested page/view will be loaded in **[Ajax](https://developer.mozilla.org/en-US/docs/AJAX)** with the **[Fetch API](https://developer.mozilla.org/en/docs/Web/API/Fetch_API)**. This will give you the ability to add transitions between the current page/view and the requested one.
+Everytime the window location changes, the requested page/view will be loaded in <a href="https://developer.mozilla.org/en-US/docs/AJAX" target="_blank">**Ajax**</a> with the <a href="https://developer.mozilla.org/en/docs/Web/API/Fetch_API" target="_blank">**Fetch API**</a>. This will give you the ability to add transitions between the current page/view and the requested one.
 
 ## Features
 
