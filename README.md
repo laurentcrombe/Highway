@@ -262,9 +262,9 @@ For older browsers there are plenty of **polyfills**, these are my favorites:
 - [Fetch API](https://github.com/github/fetch)
 - [Promises](https://babeljs.io/docs/usage/polyfill/)
 
-## Contributiors
+## Contributors
 
-- [Anthodpnt](https://github.com/Anthodpnt) - Creator
+- [Anthodpnt](https://github.com/Anthodpnt) - Owner
 - [fabricelejeune](https://github.com/fabricelejeune) - Support & Advices
 
 ## License
