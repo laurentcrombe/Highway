@@ -20,11 +20,11 @@ Highway is a lightweight (**1.8kb** *minified and gzipped*), dependency-free, co
 
 Nowadays we are working hard everyday to make the Internet a more **creative** place. We have a countless number of technologies, techniques and as many tools to do so. Today, I would like to present you the next one you will use.
 
-The default behavior of your browser reloading the page everytime you click a link has been deprecated since a few years. Thanks to Ajax techniques we can now create awesome transitions between our pages, offering our users a better and more immersive experience.
+The default behavior of your browser reloading the page everytime the window location change has been deprecated since a few years. Thanks to Ajax techniques we can now create awesome transitions between our pages, offering our users a better and more immersive experience.
 
 Highway is a lightweight (**1.8kb** *minified and gzipped*), dependency-free, complete and easy-to-use **Router** written in **ES6**. It will never be so easy to add transitions to your websites. The only limit is **your imagination**.
 
-Everytime a user will click a link, the requested page will be loaded in **Ajax** with the **Fetch API**. This will give you the ability to add transitions between the current page and the requested one.
+Everytime the window location changes, the requested page/view will be loaded in **[Ajax](https://developer.mozilla.org/en-US/docs/AJAX)** with the **[Fetch API](https://developer.mozilla.org/en/docs/Web/API/Fetch_API)**. This will give you the ability to add transitions between the current page/view and the requested one.
 
 ## Features
 
@@ -33,10 +33,10 @@ Everytime a user will click a link, the requested page will be loaded in **Ajax*
 - Setup in seconds
 - Create views is so simple...
 - ... Oh! And transitions as well
-- Transitions mode (out-in, in-out or both)
+- Transition mode (out-in, in-out or both)
 - Minimum HTTP Requests
-- Cache visited pages
-- No dependencies
+- Cache visited pages/views
+- Dependency-free
 - ...
 
 
@@ -60,12 +60,6 @@ bower install highway.js --save
 
 ```
 yarn add highway.js
-```
-
-**4. Standalone**:
-
-```html
-<script type="text/javascript" src="highway.min.js"></script>
 ```
 
 ## Usage
@@ -106,21 +100,21 @@ Here is a **sample structure** combining all these attributes:
   <footer></footer>
 </main>
 ```
-Note that the router will be automatically **disabled** when `target="_blank"`.
+Note that the router will be automatically **disabled** when `target="_blank"` and that **no transition** will apply on DOM elements **outside** the `[router-wrapper]`. 
 
 ### 2. Transitions
 
 Transition are objects with `in` and `out` methods.  
 These methods take arguments given by the router. **You don't even need to care about them but don't forget them**.
 
-| Arguments  | Description                                               |
-|------------|-----------------------------------------------------------|
-| `view`     | View DOM you can use for your transition                  |
-| `complete` | Callback method you **must call** when transition is over |
+| Arguments  | Description                                                 |
+|------------|-------------------------------------------------------------|
+| `view`     | View's DOM you can use for your transitions                 |
+| `complete` | Callback method you **must call** when transitions are over |
 
 Here is a **sample structure** of a transition:
 
-```js
+```javascript
 const TransitionName = {
   in: (view, complete) {
     // Transition In
@@ -144,8 +138,8 @@ Besides you can set the **mode** of your transitions when you [create your route
 
 ### 3. Views
 
-Views are [ES6 Classes](https://ponyfoo.com/articles/es6#classes) that extends the `Highway.View` class. Each view has a **serie of methods** to give you the ability to manage your view along the process of the transition.  
-Here is the list of these methods:
+Each view is an [ES6 Class](https://ponyfoo.com/articles/es6#classes) that extends the `Highway.View` one. It has a **serie of methods** to give you the ability to manage it along the process of the transition.  
+Here are the list of these methods:
 
 | Arguments                 | Description                                                        |
 |---------------------------|--------------------------------------------------------------------|
@@ -154,7 +148,32 @@ Here is the list of these methods:
 | `View.onEnterCompleted()` | Fire when the requested view's `in` transition is over             |
 | `View.onLeaveCompleted()` | Fire when the previous view is removed from the `[router-wrapper]` |
 
-Your can name your views as you want or name them with the value of the corresponding `[router-view]` DOM Element with a capital letter.
+Besides, each view **needs a transition** your can define using the `transition` [getter](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/get) that will return your previously created transition as explained earlier.
+
+Here is a **sample structure** of a view:
+
+```javascript
+// Import Highway
+import Highway from 'path/to/highway.js';
+
+// Import Transitions
+import TransitionName from 'path/to/TransitionName.js'
+
+// The View
+class MyView extends Highway.View {
+  get transition() {
+    // The `transition getter (required)
+    return TransitionName;
+  }
+  
+  onEnter() {}
+  onLeave() {}
+  onEnterCompleted() {}
+  onLeaveCompleted() {}
+}
+
+export default MyView;
+```
 
 ### 4. Analytics
 
