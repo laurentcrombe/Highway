@@ -20,11 +20,11 @@ Highway is a lightweight (**1.8kb** *minified and gzipped*), dependency-free and
 
 Nowadays we are working hard everyday to make the Internet a more **creative** place. We have a countless number of technologies, techniques and as many tools to do so. Today, I would like to present you the next one you will use.
 
-The default behavior of your browser reloading the page everytime the window location change has been deprecated since a few years. Thanks to Ajax techniques we can now create awesome transitions between our pages, offering our users a better and more immersive experience.
+The default behavior of your browser reloading the page everytime the window location changes has been deprecated since a few years. Thanks to Ajax techniques we can now create awesome transitions between our pages, offering our users a better and more immersive experience.
 
-Highway is a lightweight (**1.8kb** *minified and gzipped*), dependency-free, complete and easy-to-use **Router** written in **ES6**. It will never be so easy to add transitions to your websites. The only limit is **your imagination**.
+Highway is a lightweight (**1.8kb** *minified and gzipped*), dependency-free and easy-to-use **Router** written in **ES6**. It will never be so easy to add transitions to your websites. The only limit is **your imagination**.
 
-Everytime the window location changes, the requested page/view will be loaded in **[Ajax](https://developer.mozilla.org/en-US/docs/AJAX)** with the **[Fetch API](https://developer.mozilla.org/en/docs/Web/API/Fetch_API)**. This will give you the ability to add transitions between the current page/view and the requested one.
+Everytime the window location changes, the requested page/view will be loaded in **[Ajax](https://developer.mozilla.org/en-US/docs/AJAX)** using the **[Fetch API](https://developer.mozilla.org/en/docs/Web/API/Fetch_API)**. This will give you the ability to add transitions between the current page/view and the requested one.
 
 ## Features
 
@@ -35,7 +35,7 @@ Everytime the window location changes, the requested page/view will be loaded in
 - ... Oh! And transitions as well
 - Transition mode (out-in, in-out or both)
 - Minimum HTTP Requests
-- Cache visited pages/views
+- Cache pages/views
 - Dependency-free
 - ...
 
@@ -104,8 +104,8 @@ Note that the router will be automatically **disabled** when `target="_blank"` a
 
 ### 2. Transitions
 
-Transition are objects with `in` and `out` methods.  
-These methods take arguments given by the router. **You don't even need to care about them but don't forget them**.
+Transitions are objects with `in` and `out` methods.  
+These methods take two arguments given by the router. **You don't even need to care about them but don't forget them**.
 
 | Arguments  | Description                                                 |
 |------------|-------------------------------------------------------------|
@@ -178,7 +178,7 @@ export default MyView;
 ### 4. Analytics
 
 The `Highway.View` has an `analytics` method that is extended to all your views.  
-This method send a new `pageview` event to your Google Analytics when the `in` transition of your view is over and **only if you have specified** a GA script tag in the `head` of your website.
+This method send a new `pageview` event to Google Analytics when your view's `in` transition is over and **only if you have specified** a GA script tag in the `head` of your website.
 
 ```javascript
 // [...]
