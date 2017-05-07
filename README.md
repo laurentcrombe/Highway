@@ -213,7 +213,7 @@ class MyView extends Highway.View {
 
 ### 5. Router
 
-Now your know how to create [your views](#views) and [your transitions](#transitions) so let me explain you **how to create the router itself**. This is quite simple, all you need to do is create a new instance of the `Highway.Router`. It takes an **object** as only parameter with these values:
+Now your know how to create [your views](#3-views) and [your transitions](#2-transitions) so let me explain you **how to create the router itself**. This is quite simple, all you need to do is create a new instance of the `Highway.Router`. It takes an **object** as only parameter with these values:
 
 | Value                     | Type            | Description                                      |
 |---------------------------|-----------------|--------------------------------------------------|
