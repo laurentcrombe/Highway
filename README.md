@@ -268,8 +268,8 @@ For older browsers there are plenty of **polyfills**, these are my favorites:
 - [fabricelejeune](https://github.com/fabricelejeune) - Support & Advices - [Twitter](https://twitter.com/fabricelejeune)
 
 ## TO-DO
-[ ] Create Github Page
-[ ] Add Live Demos
+- [ ] Create Github Page
+- [ ] Add Live Demos
 
 ## License
 
