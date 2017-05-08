@@ -10,16 +10,16 @@
 
 
 const Fade = {
-  in: (view, complete) => {
+  in: (view, done) => {
     TweenMax.fromTo(view, 1, 
       { alpha: 0.0 },
-      { alpha: 1.0, onComplete: complete },
+      { alpha: 1.0, onComplete: done },
     );
   },
-  out: (view, complete) => {
+  out: (view, done) => {
     TweenMax.fromTo(view, 1, 
       { alpha: 1.0 },
-      { alpha: 0.0, onComplete: complete },
+      { alpha: 0.0, onComplete: done },
     );
   }
 };

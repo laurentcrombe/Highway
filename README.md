@@ -112,16 +112,16 @@ These methods take two arguments given by the router. **You don't even need to c
 | Arguments  | Description                                                 |
 |------------|-------------------------------------------------------------|
 | `view`     | View's DOM you can use for your transitions                 |
-| `complete` | Callback method you **must call** when transitions are over |
+| `done`     | Callback method you **must call** when transitions are over |
 
 Here is a **sample structure** of a transition:
 
 ```javascript
 const TransitionName = {
-  in: (view, complete) {
+  in: (view, done) {
     // Transition In
   },
-  out: (view, complete) {
+  out: (view, done) {
     // Transition Out
   },
 };
