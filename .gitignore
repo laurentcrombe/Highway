@@ -10,7 +10,6 @@ bower_components/
 # Folders
 docs/_site
 docs/js
-docs/examples/**/dist/js
 
 # Files
 Gemfile
