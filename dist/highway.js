@@ -92,22 +92,22 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /**
- * Highway - Router File:
+ * Highway - Loader File:
  * This file contains the methods handling the routing of your pages.
  * 
  * @author: Anthodpnt <antho.dpnt@gmail.com>
  * @version: 1.0.0
  */
 
-var Router = function () {
+var Loader = function () {
   /**
    * Constructor:
-   * Construct the Router, initialise it and extract options.
+   * Construct the Loader, initialise it and extract options.
    * 
    * @param {object} options - The Options
    */
-  function Router(options) {
-    _classCallCheck(this, Router);
+  function Loader(options) {
+    _classCallCheck(this, Loader);
 
     // Options
     this.views = options.views;
@@ -127,18 +127,18 @@ var Router = function () {
 
   /**
    * Initialisation:
-   * When landing on the website the first page does'nt pass through the router
-   * so we need to initialise it as well as the attributes of our router.
+   * When landing on the website the first page does'nt pass through the loader
+   * so we need to initialise it as well as the attributes of our loader.
    */
 
 
-  _createClass(Router, [{
+  _createClass(Loader, [{
     key: 'init',
     value: function init() {
       // Attributes
       var title = document.querySelector('title').innerHTML;
-      var view = document.querySelector('[router-view]');
-      var name = view.getAttribute('router-view');
+      var view = document.querySelector('[loader-view]');
+      var name = view.getAttribute('loader-view');
 
       this.path = window.location.pathname;
       this.stack = {};
@@ -190,7 +190,7 @@ var Router = function () {
     key: 'bind',
     value: function bind() {
       // Get Links
-      this.links = document.querySelectorAll('a:not([router-disabled])');
+      this.links = document.querySelectorAll('a:not([loader-disabled])');
 
       // Add Events on DOM Links
       var _iteratorNormalCompletion2 = true;
@@ -267,7 +267,36 @@ var Router = function () {
       // Update Path
       this.path = window.location.pathname;
 
-      // Fetch Path
+      // Active
+      var _iteratorNormalCompletion4 = true;
+      var _didIteratorError4 = false;
+      var _iteratorError4 = undefined;
+
+      try {
+        for (var _iterator4 = this.links[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+          var link = _step4.value;
+
+          if (link.pathname === this.path) {
+            this.temp = link;
+          }
+        }
+
+        // Fetch Path
+      } catch (err) {
+        _didIteratorError4 = true;
+        _iteratorError4 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion4 && _iterator4.return) {
+            _iterator4.return();
+          }
+        } finally {
+          if (_didIteratorError4) {
+            throw _iteratorError4;
+          }
+        }
+      }
+
       this.fetchCall();
     }
 
@@ -281,11 +310,11 @@ var Router = function () {
   }, {
     key: 'active',
     value: function active(el) {
-      var classname = el.getAttribute('router-active');
+      var classname = el.getAttribute('loader-active');
 
       if (classname) {
         if (this.HTMLActive) {
-          var _classname = this.HTMLActive.getAttribute('router-active');
+          var _classname = this.HTMLActive.getAttribute('loader-active');
           this.HTMLActive.classList.remove(_classname);
         }
 
@@ -322,6 +351,9 @@ var Router = function () {
         // Open New Window
         return window.open(path, '_blank');
       }
+
+      // Save Link Temporary
+      this.temp = link;
 
       // Update
       this.update(path);
@@ -391,8 +423,8 @@ var Router = function () {
       // Update Attributes
       var page = document.createRange().createContextualFragment(result);
       var title = page.querySelector('title').innerHTML;
-      var view = page.querySelector('[router-view]');
-      var name = view.getAttribute('router-view');
+      var view = page.querySelector('[loader-view]');
+      var name = view.getAttribute('loader-view');
 
       // Update Stack
       this.stack[this.path] = {
@@ -435,6 +467,9 @@ var Router = function () {
       this.previous = this.current;
       this.current = new this.views[name](this.stack[this.path]);
 
+      // Update Active
+      this.active(this.temp);
+
       // Unbind Events
       this.unbind();
 
@@ -475,13 +510,13 @@ var Router = function () {
     }
   }]);
 
-  return Router;
+  return Loader;
 }();
 
 // Export Class
 
 
-exports.default = Router;
+exports.default = Loader;
 
 /***/ }),
 /* 1 */
@@ -509,7 +544,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 var View = function () {
   /**
    * Constructor:
-   * Construct the View, get the `router-wrapper` and extract options.
+   * Construct the View, get the `loader-wrapper` and extract options.
    * 
    * @param {object} options - The options
    */
@@ -517,7 +552,7 @@ var View = function () {
     _classCallCheck(this, View);
 
     // Wrapper
-    this.wrapper = document.querySelector('[router-wrapper]');
+    this.wrapper = document.querySelector('[loader-wrapper]');
 
     // Options
     this.title = options.title;
@@ -527,7 +562,7 @@ var View = function () {
   /**
    * Initialisation:
    * We call the enter completed method. This is usefull for the landing page
-   * that does not pass through the router.
+   * that does not pass through the loader.
    */
 
 
@@ -542,7 +577,7 @@ var View = function () {
 
     /**
      * Append:
-     * We append the view content to the `router-wrapper` and we update the page
+     * We append the view content to the `loader-wrapper` and we update the page
      * title. 
      */
 
@@ -558,7 +593,7 @@ var View = function () {
 
     /**
      * Remove:
-     * We remove the view content from the `router-wrapper`.
+     * We remove the view content from the `loader-wrapper`.
      */
 
   }, {
@@ -677,9 +712,9 @@ var _view = __webpack_require__(1);
 
 var _view2 = _interopRequireDefault(_view);
 
-var _router = __webpack_require__(0);
+var _loader = __webpack_require__(0);
 
-var _router2 = _interopRequireDefault(_router);
+var _loader2 = _interopRequireDefault(_loader);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -693,7 +728,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var Highway = {
   View: _view2.default,
-  Router: _router2.default
+  Loader: _loader2.default
 };
 
 exports.default = Highway;

@@ -1,13 +1,14 @@
 {
   "name": "highway.js",
-  "description": "Highway is an light-weight JS Router",
+  "description": "Highway is an light-weight JS Page Loader",
   "main": "dist/highway.js",
   "authors": [
     "Anthony Du Pont <antho.dpnt@gmail.com>"
   ],
   "license": "MIT",
   "keywords": [
-    "router",
+    "page",
+    "loader",
     "transitions",
     "navigation",
     "javascript",

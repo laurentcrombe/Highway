@@ -10,7 +10,7 @@ import Page from 'views/page';
 class App {
   constructor() {
     document.addEventListener('DOMContentLoaded', () => {
-      new Highway.Router({
+      new Highway.Loader({
         views: {
           'home': Home,
           'page': Page,
