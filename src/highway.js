@@ -7,8 +7,8 @@
  */
 
 
-import View from 'highway/view';
-import Loader from 'highway/loader';
+import View from './highway/view';
+import Loader from './highway/loader';
 
 const Highway = { 
   View  : View,

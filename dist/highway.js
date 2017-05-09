@@ -267,7 +267,36 @@ var Loader = function () {
       // Update Path
       this.path = window.location.pathname;
 
-      // Fetch Path
+      // Active
+      var _iteratorNormalCompletion4 = true;
+      var _didIteratorError4 = false;
+      var _iteratorError4 = undefined;
+
+      try {
+        for (var _iterator4 = this.links[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+          var link = _step4.value;
+
+          if (link.pathname === this.path) {
+            this.temp = link;
+          }
+        }
+
+        // Fetch Path
+      } catch (err) {
+        _didIteratorError4 = true;
+        _iteratorError4 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion4 && _iterator4.return) {
+            _iterator4.return();
+          }
+        } finally {
+          if (_didIteratorError4) {
+            throw _iteratorError4;
+          }
+        }
+      }
+
       this.fetchCall();
     }
 
@@ -322,6 +351,9 @@ var Loader = function () {
         // Open New Window
         return window.open(path, '_blank');
       }
+
+      // Save Link Temporary
+      this.temp = link;
 
       // Update
       this.update(path);
@@ -434,6 +466,9 @@ var Loader = function () {
 
       this.previous = this.current;
       this.current = new this.views[name](this.stack[this.path]);
+
+      // Update Active
+      this.active(this.temp);
 
       // Unbind Events
       this.unbind();

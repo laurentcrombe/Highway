@@ -101,6 +101,13 @@ class Loader {
     // Update Path
     this.path = window.location.pathname;
 
+    // Active
+    for (let link of this.links) {
+      if (link.pathname === this.path) {
+        this.temp = link;
+      }
+    }
+
     // Fetch Path
     this.fetchCall();
   }
@@ -152,6 +159,9 @@ class Loader {
       // Open New Window
       return window.open(path, '_blank');
     }
+
+    // Save Link Temporary
+    this.temp = link;
 
     // Update
     this.update(path);
@@ -246,6 +256,9 @@ class Loader {
     // Update Previous/Current
     this.previous = this.current;
     this.current  = new this.views[name](this.stack[this.path]);
+
+    // Update Active
+    this.active(this.temp);
 
     // Unbind Events
     this.unbind();
