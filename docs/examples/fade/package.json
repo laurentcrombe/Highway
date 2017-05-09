@@ -1,6 +1,6 @@
 {
   "name": "highway",
-  "version": "1.0.1",
+  "version": "1.0.7",
   "description": "Highway is an light-weight JS Router",
   "main": "src/main.js",
   "scripts": {
