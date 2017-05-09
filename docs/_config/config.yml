@@ -2,8 +2,10 @@
 # 1. Copy this file in the root folder and rename if `_config.xml`.
 # 2. From terminal, in the root folder, run `bundle init` to create the Gemfile.
 # 3. Paste `gem "jekyll"` to the generated Gemfile in the root folder.
-# 4. From terminal, run `bundle exec jekyll serve` to bundle and start server.
-# 5. Go to `http://localhost:4000` to see your bundle.
+# 4. From terminal, run `npm install` to install `node_modules`.
+# 5. From terminal, run `webpack` to build scrips.
+# 6. From terminal, run `bundle exec jekyll serve` to bundle and start server.
+# 7. Go to `http://localhost:4000` to see your site.
 
 title: Title
 description: Description

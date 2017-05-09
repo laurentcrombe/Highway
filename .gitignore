@@ -12,6 +12,6 @@ docs/_site
 docs/assets/js
 
 # Files
-# Gemfile
+Gemfile
 Gemfile.lock
 _config.yml
