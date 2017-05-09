@@ -9,9 +9,9 @@ bower_components/
 
 # Folders
 docs/_site
-docs/js
+docs/assets/js
 
 # Files
-Gemfile
+# Gemfile
 Gemfile.lock
-_config.yml
+# _config.yml

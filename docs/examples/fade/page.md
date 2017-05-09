@@ -1,9 +1,6 @@
 ---
 layout: default
-title: Basic
+title: Fade
 ---
 
 ## Fade - Page
-
-- [Index](/)
-- [Page](/page.html)
