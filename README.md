@@ -1,6 +1,6 @@
 ## Highway
 
-Highway is a lightweight (**1.8kb** *minified and gzipped*), dependency-free and easy-to-use **Router** written in **ES6**.
+Highway is a lightweight (**1.8kb** *minified and gzipped*), dependency-free and easy-to-use **Page Loader** written in **ES6**.
 
 ## Table of Contents
 
@@ -12,7 +12,7 @@ Highway is a lightweight (**1.8kb** *minified and gzipped*), dependency-free and
 	- [Transitions](#2-transitions)
 	- [Views](#3-views)
 	- [Analytics](#4-analytics)
-	- [Router](#5-router)
+	- [Loader](#5-loader)
 - [Examples](#examples)
 - [Browser Support](#browser-support)
 - [Contributors](#contributors)
@@ -25,7 +25,7 @@ Nowadays we are working hard everyday to make the Internet a more **creative** p
 
 The default behavior of your browser reloading the page everytime the window location changes has been deprecated since a few years. Thanks to Ajax techniques we can now create awesome transitions between our pages, offering our users a better and more immersive experience.
 
-Highway is a lightweight (**1.8kb** *minified and gzipped*), dependency-free and easy-to-use **Router** written in **ES6**. It will never be so easy to add transitions to your websites. The only limit is **your imagination**.
+Highway is a lightweight (**1.8kb** *minified and gzipped*), dependency-free and easy-to-use **Page Loader** written in **ES6**. It will never be so easy to add transitions to your websites. The only limit is **your imagination**.
 
 Everytime the window location changes, the requested page/view will be loaded in **[Ajax](https://developer.mozilla.org/en-US/docs/AJAX)** using the **[Fetch API](https://developer.mozilla.org/en/docs/Web/API/Fetch_API)**. This will give you the ability to add transitions between the current page/view and the requested one.
 
@@ -73,10 +73,10 @@ Here are these attributes and how to use them to setup your DOM:
 
 | Attributes          | Description      | Value      | Required  |
 |---------------------|------------------|------------|-----------|
-| `[router-wrapper]`  | Contain Views    | N/A        | **YES**   |
-| `[router-view]`     | Contain View DOM | View Name  | **YES**   |
-| `[router-active]`   | Add Active Class | Class Name | **NO**    |
-| `[router-disabled]` | Disable Router   | N/A        | **NO**    |
+| `[loader-wrapper]`  | Contain Views    | N/A        | **YES**   |
+| `[loader-view]`     | Contain View DOM | View Name  | **YES**   |
+| `[loader-active]`   | Add Active Class | Class Name | **NO**    |
+| `[loader-disabled]` | Disable Loader   | N/A        | **NO**    |
 
 Here is a **sample structure** combining all these attributes:
 
@@ -85,16 +85,16 @@ Here is a **sample structure** combining all these attributes:
   <!-- Header - No transition -->
   <header>
     <ul>
-      <li><a href="#" router-active="is-active"></a></li>
-      <li><a href="#" router-active="is-active"></a></li>
-      <li><a href="#" router-disabled></a></li>
+      <li><a href="#" loader-active="is-active"></a></li>
+      <li><a href="#" loader-active="is-active"></a></li>
+      <li><a href="#" loader-disabled></a></li>
     </ul>
   </header>
 	
-  <!-- Router Wrapper -->
-  <div router-wrapper>
-    <!-- Router View - Transition -->
-    <div router-view="my-view">
+  <!-- Loader Wrapper -->
+  <div loader-wrapper>
+    <!-- Loader View - Transition -->
+    <div loader-view="my-view">
       <h1>My View</h1>
     </div>
   </div>
@@ -103,12 +103,12 @@ Here is a **sample structure** combining all these attributes:
   <footer></footer>
 </main>
 ```
-Note that the router will be automatically **disabled** when `target="_blank"` and that **no transition** will apply on DOM elements **outside** the `[router-wrapper]`. 
+Note that the loader will be automatically **disabled** when `target="_blank"` and that **no transition** will apply on DOM elements **outside** the `[loader-wrapper]`. 
 
 ### 2. Transitions
 
 Transitions are objects with `in` and `out` methods.  
-These methods take two arguments given by the router. **You don't even need to care about them but don't forget them**.
+These methods take two arguments given by the loader. **You don't even need to care about them but don't forget them**.
 
 | Arguments  | Description                                                 |
 |------------|-------------------------------------------------------------|
@@ -131,7 +131,7 @@ export default TransitionName;
 ```
 
 Your can find more [examples here](#examples).  
-Besides you can set the **mode** of your transitions when you [create your router](#5-router).
+Besides you can set the **mode** of your transitions when you [create your loader](#5-loader).
 
 | Mode                  | Description                            |
 |-----------------------|----------------------------------------|
@@ -146,10 +146,10 @@ Here are the list of these methods:
 
 | Arguments                 | Description                                                        |
 |---------------------------|--------------------------------------------------------------------|
-| `View.onEnter()`          | Fire when the requested view is added to the `[router-wrapper]`    |
+| `View.onEnter()`          | Fire when the requested view is added to the `[loader-wrapper]`    |
 | `View.onLeave()`          | Fire when the previous view's `out` transition starts              |
 | `View.onEnterCompleted()` | Fire when the requested view's `in` transition is over             |
-| `View.onLeaveCompleted()` | Fire when the previous view is removed from the `[router-wrapper]` |
+| `View.onLeaveCompleted()` | Fire when the previous view is removed from the `[loader-wrapper]` |
 
 Besides, each view **needs a transition** your can define using the `transition` [getter](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/get) that will return your previously created transition as explained earlier.
 
@@ -214,18 +214,18 @@ class MyView extends Highway.View {
 // [...]
 ```
 
-### 5. Router
+### 5. Loader
 
-Now your know how to create [your views](#3-views) and [your transitions](#2-transitions) so let me explain you **how to create the router itself**. This is quite simple, all you need to do is create a new instance of the `Highway.Router`. It takes an **object** as only parameter with these values:
+Now your know how to create [your views](#3-views) and [your transitions](#2-transitions) so let me explain you **how to create the loader itself**. This is quite simple, all you need to do is create a new instance of the `Highway.Loader`. It takes an **object** as only parameter with these values:
 
 | Value                     | Type            | Description                                      |
 |---------------------------|-----------------|--------------------------------------------------|
 | `views`                   | `object`        | The list of views (`[name]:[class]`)            |
 | `mode`                    | `string`        | The transition mode (`out-in`, `in-out`, `both`) |
 
-Note that the `[name]` in the `views` object refers to the value you passed to the `[router-view]` and the `[class]` refers to your view class.
+Note that the `[name]` in the `views` object refers to the value you passed to the `[loader-view]` and the `[class]` refers to your view class.
 
-Here is a **sample code** to instanciate your router:
+Here is a **sample code** to instanciate your loader:
 
 ```javascript
 // Import Highway
@@ -236,8 +236,8 @@ import MyView from 'path/to/MyView.js';
 
 class App {
   constructor() {
-    // Create the Router
-    this.Router = new Highway.Router({
+    // Create the Loader
+    this.Loader = new Highway.Loader({
       views: {
         'my-view': MyView,
       },

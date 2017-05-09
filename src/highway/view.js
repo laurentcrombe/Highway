@@ -10,13 +10,13 @@
 class View {
   /**
    * Constructor:
-   * Construct the View, get the `router-wrapper` and extract options.
+   * Construct the View, get the `loader-wrapper` and extract options.
    * 
    * @param {object} options - The options
    */
   constructor(options) {
     // Wrapper
-    this.wrapper = document.querySelector('[router-wrapper]');
+    this.wrapper = document.querySelector('[loader-wrapper]');
 
     // Options
     this.title = options.title;
@@ -27,7 +27,7 @@ class View {
   /**
    * Initialisation:
    * We call the enter completed method. This is usefull for the landing page
-   * that does not pass through the router.
+   * that does not pass through the loader.
    */
   init() {
     // Enter Completed
@@ -39,7 +39,7 @@ class View {
 
   /**
    * Append:
-   * We append the view content to the `router-wrapper` and we update the page
+   * We append the view content to the `loader-wrapper` and we update the page
    * title. 
    */
   append() {
@@ -53,7 +53,7 @@ class View {
 
   /**
    * Remove:
-   * We remove the view content from the `router-wrapper`.
+   * We remove the view content from the `loader-wrapper`.
    */
   remove() {
     // Remove
