@@ -1,7 +1,9 @@
 # Sample Config File
-# Copy this file in the root directory and rename if `_config.xml`
-# Once it's done, from the terminal run `jekyll init ` to create you Gemfile.
-# Finally run `bundle exec jekyll server` to start jekyll bundle.
+# 1. Copy this file in the root folder and rename if `_config.xml`.
+# 2. From terminal, in the root folder, run `bundle init` to create the Gemfile.
+# 3. Paste `gem "jekyll"` to the generated Gemfile in the root folder.
+# 4. From terminal, run `bundle exec jekyll serve` to bundle and start server.
+# 5. Go to `http://localhost:4000` to see your bundle.
 
 title: Title
 description: Description
