@@ -1,0 +1,22 @@
+html, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  margin: 0;
+  font-family: 'Helvetica', sans-serif;
+  font-size: 1.3rem;
+  line-height: 2.2rem;
+  color: #333333;
+}
+
+.center {
+  display: block;
+  max-width: 60rem;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
