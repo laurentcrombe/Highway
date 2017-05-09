@@ -6,4 +6,4 @@ node_modules/
 bower_components/
 
 # Folders
-examples/**/dist/js
+# examples/**/dist/js
