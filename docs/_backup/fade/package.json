@@ -1,7 +1,7 @@
 {
   "name": "highway",
-  "version": "1.0.7",
-  "description": "Highway is an light-weight JS Router",
+  "version": "1.0.9",
+  "description": "Highway is an light-weight JS Page Loader",
   "main": "src/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

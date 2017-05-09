@@ -1,5 +1,5 @@
 /**
- * Highway - Router File:
+ * Highway - Loader File:
  * This file contains the methods handling the routing of your pages.
  * 
  * @author: Anthodpnt <antho.dpnt@gmail.com>
@@ -7,10 +7,10 @@
  */
 
 
-class Router {
+class Loader {
   /**
    * Constructor:
-   * Construct the Router, initialise it and extract options.
+   * Construct the Loader, initialise it and extract options.
    * 
    * @param {object} options - The Options
    */
@@ -34,14 +34,14 @@ class Router {
 
   /**
    * Initialisation:
-   * When landing on the website the first page does'nt pass through the router
-   * so we need to initialise it as well as the attributes of our router.
+   * When landing on the website the first page does'nt pass through the loader
+   * so we need to initialise it as well as the attributes of our loader.
    */
   init() {
     // Attributes
     const title = document.querySelector('title').innerHTML;
-    const view  = document.querySelector('[router-view]');
-    const name  = view.getAttribute('router-view');
+    const view  = document.querySelector('[loader-view]');
+    const name  = view.getAttribute('loader-view');
 
     this.path  = window.location.pathname;
     this.stack = {};
@@ -70,7 +70,7 @@ class Router {
    */
   bind() {
     // Get Links
-    this.links = document.querySelectorAll('a:not([router-disabled])');
+    this.links = document.querySelectorAll('a:not([loader-disabled])');
 
     // Add Events on DOM Links
     for (let link of this.links) {
@@ -101,6 +101,13 @@ class Router {
     // Update Path
     this.path = window.location.pathname;
 
+    // Active
+    for (let link of this.links) {
+      if (link.pathname === this.path) {
+        this.temp = link;
+      }
+    }
+
     // Fetch Path
     this.fetchCall();
   }
@@ -113,11 +120,11 @@ class Router {
    * @param {object} el - The Element
    */
   active(el) {
-    const classname = el.getAttribute('router-active');
+    const classname = el.getAttribute('loader-active');
 
     if (classname) {
       if (this.HTMLActive) {
-        const classname = this.HTMLActive.getAttribute('router-active');
+        const classname = this.HTMLActive.getAttribute('loader-active');
         this.HTMLActive.classList.remove(classname);
       }
 
@@ -152,6 +159,9 @@ class Router {
       // Open New Window
       return window.open(path, '_blank');
     }
+
+    // Save Link Temporary
+    this.temp = link;
 
     // Update
     this.update(path);
@@ -210,8 +220,8 @@ class Router {
     // Update Attributes
     const page  = document.createRange().createContextualFragment(result);
     const title = page.querySelector('title').innerHTML;
-    const view  = page.querySelector('[router-view]'); 
-    const name  = view.getAttribute('router-view');
+    const view  = page.querySelector('[loader-view]'); 
+    const name  = view.getAttribute('loader-view');
 
     // Update Stack
     this.stack[this.path] = {
@@ -246,6 +256,9 @@ class Router {
     // Update Previous/Current
     this.previous = this.current;
     this.current  = new this.views[name](this.stack[this.path]);
+
+    // Update Active
+    this.active(this.temp);
 
     // Unbind Events
     this.unbind();
@@ -288,4 +301,4 @@ class Router {
 }
 
 // Export Class
-export default Router;
+export default Loader;

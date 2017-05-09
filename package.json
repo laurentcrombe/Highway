@@ -1,9 +1,10 @@
 {
   "name": "highway.js",
-  "version": "1.0.7",
-  "description": "Highway is an light-weight JS Router",
+  "version": "1.0.9",
+  "description": "Highway is an light-weight JS Page Loader",
   "keywords": [
-    "router",
+    "page",
+    "loader",
     "transitions",
     "navigation",
     "javascript",

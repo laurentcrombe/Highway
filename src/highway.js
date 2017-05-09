@@ -7,12 +7,12 @@
  */
 
 
-import View from 'highway/view';
-import Router from 'highway/router';
+import View from './highway/view';
+import Loader from './highway/loader';
 
 const Highway = { 
   View  : View,
-  Router: Router,
+  Loader: Loader,
 };
 
 export default Highway;
