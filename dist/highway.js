@@ -479,7 +479,9 @@ var Loader = function () {
         // Previous and current transitions run at the same time.
         case 'both':
           this.current.load();
-          this.previous.unload().then(this.bind).catch(function (e) {
+          this.previous.unload().then(function () {
+            return _this2.bind();
+          }).catch(function (e) {
             throw Error(e);
           });
           break;

@@ -270,7 +270,7 @@ class Loader {
       case 'both':
         this.current.load();
         this.previous.unload()
-          .then(this.bind)
+          .then(() => this.bind())
           .catch((e) => { 
             throw Error(e);
           });
